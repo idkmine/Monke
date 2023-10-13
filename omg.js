@@ -40285,6 +40285,9 @@ globalThis.LoadNewClient = () => {
           var x = 0;
           var y = 0;
        };
+       if(Cheat_Settings.RoofsXray.enabed){
+          this.opacity = 0.4
+       } else {
        var len = sprite[SPRITE.ROOFS].length;
        img = sprite[SPRITE.ROOFS][(this.j + (this.i % 2)) % len][world.time];
        w = -img.width;
@@ -40299,6 +40302,7 @@ globalThis.LoadNewClient = () => {
           this.opacity = Math.max(this.opacity - delta, 0.3);
        else
           this.opacity = Math.min(this.opacity + delta, 1);
+    }
        var old = ctx.globalAlpha;
        ctx.globalAlpha *= this.opacity;
        ctxDrawImage(ctx, img, (-w / 2) + x, (-h / 2) + y, w, h);
