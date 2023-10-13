@@ -132,13 +132,16 @@ globalThis.LoadNewClient = () => {
             gui.Register({type: 'folder',label: 'Binds',open: false});
 
             gui.Register([
-                {type: 'checkbox',label: 'Colored Spikes',object: Cheat_Settings.ColoredSpikes ,property: 'enabled',onChange: data => {UtilsUI.saveSettings();}},
-                {type: 'checkbox',label: 'Roofs Xray',object: Cheat_Settings.RoofsXray,property: 'enabled',onChange: data => {UtilsUI.saveSettings();}},
+                {type: 'checkbox',label: 'Colored Spikes',object: Cheat_Settings.ColoredSpikes , property: 'enabled',onChange: data => {
+                    console.log('hm')
+                    UtilsUI.saveSettings();
+                }},
+                {type: 'checkbox',label: 'Roofs Xray',object: Cheat_Settings.RoofsXray, property: 'enabled',onChange: data => {UtilsUI.saveSettings();}},
             ],{folder: "Visuals"});
 
 
             gui.Register([
-                {type: "checkbox",label: "Auto Respawn",object: Cheat_Settings.AutoRespawn,property: "enabled" ,onChange(e) {UtilsUI.saveSettings();}},
+                {type: "checkbox",label: "Auto Respawn",object: Cheat_Settings.AutoRespawn, property: "enabled" ,onChange(e) {UtilsUI.saveSettings();}},
             ],{folder: "Misc"});
 
 
