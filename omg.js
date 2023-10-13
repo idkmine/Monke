@@ -58721,14 +58721,14 @@ globalThis.LoadNewClient = () => {
                 let pi2 = Math.PI * 2, realAngle = Math.floor((((myPlayer.angle + pi2) % pi2) * 255) / pi2);
                 switch (Cheat_Settings.AutoSpike.mode) {
                     case 0: 
-                        client.sendJson([108, type, realAngle, 0])
+                        client.sendJson([102, type, realAngle, 0])
                     break;
     
                     case 1:
                         for (var i = 0; i < Cheat_Settings.AutoSpike.extra; i++)
-                            client.sendJson([108, type, realAngle, 0])
-                            client.sendJson([108, type, (realAngle + Cheat_Settings.AutoSpike.extra) % 255, 0])
-                            client.sendJson([108, type, (realAngle - Cheat_Settings.AutoSpike.extra + 255) % 255, 0])
+                            client.sendJson([102, type, realAngle, 0])
+                            client.sendJson([102, type, (realAngle + Cheat_Settings.AutoSpike.extra) % 255, 0])
+                            client.sendJson([102, type, (realAngle - Cheat_Settings.AutoSpike.extra + 255) % 255, 0])
                         
                     break;
     
