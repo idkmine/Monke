@@ -58674,8 +58674,10 @@ globalThis.LoadNewClient = () => {
 
         if (!client.socket || client.socket.readyState !== 1) return;
         let myPlayer = world.fast_units[user.uid];
+        console.log('running')
     
         if (HackSettings.AutoSpike.enabled) {
+            console.log('on')
             for (let e = 0, o = HackSettings.AutoSpike.preferences; e < o.length; e++) {
                 var i = o[e];
                 switch (i) {
@@ -58731,10 +58733,12 @@ globalThis.LoadNewClient = () => {
         }
     
     }
+
+    setInterval(() => {AutoSpike()}, 150)
  
     window.onload = () => {
        //evelAccountsAPI.initGoogleAPI()
-       setInterval(() => {AutoSpike()}, 150)
+
     }
  
     window.onbeforeunload = function () {
