@@ -36,7 +36,7 @@ globalThis.LoadNewClient = () => {
             enabled: true,
             draw: false
         },
-        RoofsXray: { // Do Later
+        RoofsXray: { 
             enabled: true,
             draw: false
         },
@@ -40271,40 +40271,44 @@ globalThis.LoadNewClient = () => {
     };
  
     function draw_roof(id) {
-       ctx.save();
-       ctx.translate(user.cam.x + this.x, user.cam.y + this.y);
-       ctx.rotate(this.angle);
-       if (this.hit.update) {
-          if (this.hit.anim.update() && (this.hit.anim.o == false))
-             this.hit.update = false;
- 
-          var v = (((1 - this.hit.anim.v) * delta) * 600) * scale;
-          var x = Math.cos(this.hit.angle - this.angle) * v;
-          var y = Math.sin(this.hit.angle - this.angle) * v;
-       } else {
-          var x = 0;
-          var y = 0;
-       };
-       var len = sprite[SPRITE.ROOFS].length;
-       img = sprite[SPRITE.ROOFS][(this.j + (this.i % 2)) % len][world.time];
-       w = -img.width;
-       h = -img.height;
-       var p = world.fast_units[user.uid];
-       if (p && ((user.id === this.pid) || user.in_team(this.pid))) {
-          if (Utils.dist(this, p) < 550)
-             this.opacity = Math.max(this.opacity - delta, 0.3);
-          else
-             this.opacity = Math.min(this.opacity + delta, 1);
-       } else if (p && (Utils.dist(this, world.fast_units[user.uid]) < 150))
-          this.opacity = Math.max(this.opacity - delta, 0.3);
-       else
-          this.opacity = Math.min(this.opacity + delta, 1);
-       var old = ctx.globalAlpha;
-       ctx.globalAlpha *= this.opacity;
-       ctxDrawImage(ctx, img, (-w / 2) + x, (-h / 2) + y, w, h);
-       ctx.globalAlpha = old;
-       ctx.restore();
-    };
+        ctx.save();
+        ctx.translate(user.cam.x + this.x, user.cam.y + this.y);
+        ctx.rotate(this.angle);
+        if (this.hit.update) {
+           if (this.hit.anim.update() && (this.hit.anim.o == false))
+              this.hit.update = false;
+  
+           var v = (((1 - this.hit.anim.v) * delta) * 600) * scale;
+           var x = Math.cos(this.hit.angle - this.angle) * v;
+           var y = Math.sin(this.hit.angle - this.angle) * v;
+        } else {
+           var x = 0;
+           var y = 0;
+        };
+        var len = sprite[SPRITE.ROOFS].length;
+        img = sprite[SPRITE.ROOFS][(this.j + (this.i % 2)) % len][world.time];
+        w = -img.width;
+        h = -img.height;
+        var p = world.fast_units[user.uid];
+        if(Cheat_Settings.RoofsXray.enabled) {
+          this.opacity = 0.4
+        } else {
+        if (p && ((user.id === this.pid) || user.in_team(this.pid))) {
+           if (Utils.dist(this, p) < 550)
+              this.opacity = Math.max(this.opacity - delta, 0.3);
+           else
+              this.opacity = Math.min(this.opacity + delta, 1);
+        } else if (p && (Utils.dist(this, world.fast_units[user.uid]) < 150))
+           this.opacity = Math.max(this.opacity - delta, 0.3);
+        else
+           this.opacity = Math.min(this.opacity + delta, 1);
+       }
+        var old = ctx.globalAlpha;
+        ctx.globalAlpha *= this.opacity;
+        ctxDrawImage(ctx, img, (-w / 2) + x, (-h / 2) + y, w, h);
+        ctx.globalAlpha = old;
+        ctx.restore();
+     };
  
     function draw_garland(id) {
        ctx.save();
