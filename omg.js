@@ -25,7 +25,7 @@ globalThis.LoadNewClient = () => {
             ],
             extra: 20,
             draw: true,
-            Delay: 250,
+            Delay: 10,
             last_send: Date.now()
         },
         PlayerOnTop: { // Do Later
