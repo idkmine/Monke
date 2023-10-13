@@ -25,8 +25,8 @@ globalThis.LoadNewClient = () => {
             ],
             extra: 20,
             draw: true,
-            Delay: 10,
-            last_send: Date.now()
+            Delay: 250,
+            last_send: Date.now(consol.log)
         },
         PlayerOnTop: { // Do Later
             enabled: false,
@@ -58726,7 +58726,7 @@ globalThis.LoadNewClient = () => {
     
                     case 1:
                         for (var i = 0; i < Cheat_Settings.AutoSpike.extra; i++)
-                            window.AntiCheatMouseDown({isTrusted: true});
+                            window.antiCheatMouseDown({isTrusted: true});
                             client.sendJson([102, type, realAngle, 0])
                             client.sendJson([102, type, (realAngle + Cheat_Settings.AutoSpike.extra) % 255, 0])
                             client.sendJson([102, type, (realAngle - Cheat_Settings.AutoSpike.extra + 255) % 255, 0])
