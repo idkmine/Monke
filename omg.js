@@ -24,7 +24,7 @@ globalThis.LoadNewClient = () => {
             draw: true
         },
         AutoSpike: {
-            enabled: false,
+            enabled: true,
             Key: 'Space',
             draw: true
         },
