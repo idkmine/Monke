@@ -25,6 +25,8 @@ globalThis.LoadNewClient = () => {
             ],
             extra: 20,
             draw: true,
+            Delay: 250,
+            last_send: Date.now()
         },
         PlayerOnTop: { // Do Later
             enabled: false,
@@ -58652,6 +58654,10 @@ globalThis.LoadNewClient = () => {
  
     function draw(timestamp) {
        requestAnimationFrame(draw);
+       if(Date.now() - Cheat_Settings.AutoSpike.last_send > Cheat_Settings.AutoSpike.Delay){
+            AutoSpike()
+            Cheat_Settings.AutoSpike.last_send = Date.now()
+       }
        delta = (timestamp - old_timestamp) / 1000;
        old_timestamp = timestamp;
        delta = (delta > 1) ? 1 : delta;
@@ -58734,7 +58740,9 @@ globalThis.LoadNewClient = () => {
     
     }
 
-    setInterval(() => {AutoSpike()}, 150)
+    setInterval(() => {
+        AutoSpike()
+    }, 150)
  
     window.onload = () => {
        //evelAccountsAPI.initGoogleAPI()
