@@ -17,6 +17,31 @@ globalThis.LoadNewClient = () => {
           return 0
     };
 
+    var Cheat_Settings = {
+        AutoRespawn: {
+            enabled: true,
+            Delay: 1000,
+            draw: true
+        },
+        AutoSpike: {
+            enabled: false,
+            Key: 'Space',
+            draw: true
+        },
+        PlayerOnTop: {
+            enabled: false,
+            draw: false
+        },
+        ColoredSpikes: {
+            enabled: true,
+            draw: false
+        },
+        RoofsXray: {
+            enabled: true,
+            draw: false
+        }
+    }
+
     let UtilsUI = {
         initUI: () => {
             let container = document.body;
@@ -114,30 +139,7 @@ globalThis.LoadNewClient = () => {
     };
     UtilsUI.LoadHack();
 
-    var Cheat_Settings = {
-        AutoRespawn: {
-            enabled: true,
-            Delay: 1000,
-            draw: true
-        },
-        AutoSpike: {
-            enabled: false,
-            Key: 'Space',
-            draw: true
-        },
-        PlayerOnTop: {
-            enabled: false,
-            draw: false
-        },
-        ColoredSpikes: {
-            enabled: true,
-            draw: false
-        },
-        RoofsXray: {
-            enabled: true,
-            draw: false
-        }
-    }
+
     var AppData = {
        VERSION: 20,
        DEVELOPERS: "RubyDevil & Otterly",
