@@ -19,8 +19,8 @@ globalThis.LoadNewClient = () => {
 
     var Cheat_Settings = {
         AutoRespawn: {
-            Enabled: true,
-            Delay: 1000,
+            enabled: true,
+            Delay: 100,
             draw: true
         },
         AutoSpike: {
