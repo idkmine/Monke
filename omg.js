@@ -58679,12 +58679,11 @@ globalThis.LoadNewClient = () => {
     function AutoSpike () {
 
         if (!client.socket || client.socket.readyState !== 1) return;
+        if(user.build.wait) return;
         let myPlayer = world.fast_units[user.uid];
-        console.log('running')
     
-        if (HackSettings.AutoSpike.enabled) {
-            console.log('on')
-            for (let e = 0, o = HackSettings.AutoSpike.preferences; e < o.length; e++) {
+        if (Cheat_Settings.AutoSpike.enabled) {
+            for (let e = 0, o = Cheat_Settings.AutoSpike.preferences; e < o.length; e++) {
                 var i = o[e];
                 switch (i) {
                     case "Reidite Spike":
@@ -58720,16 +58719,16 @@ globalThis.LoadNewClient = () => {
     
             if (type) {
                 let pi2 = Math.PI * 2, realAngle = Math.floor((((myPlayer.angle + pi2) % pi2) * 255) / pi2);
-                switch (HackSettings.AutoSpike.mode) {
+                switch (Cheat_Settings.AutoSpike.mode) {
                     case 0: 
                         client.sendJson([108, type, realAngle, 0])
                     break;
     
                     case 1:
-                        for (var i = 0; i < HackSettings.AutoSpike.extra; i++)
+                        for (var i = 0; i < Cheat_Settings.AutoSpike.extra; i++)
                             client.sendJson([108, type, realAngle, 0])
-                            client.sendJson([108, type, (realAngle + HackSettings.AutoSpike.extra) % 255, 0])
-                            client.sendJson([108, type, (realAngle - HackSettings.AutoSpike.extra + 255) % 255, 0])
+                            client.sendJson([108, type, (realAngle + Cheat_Settings.AutoSpike.extra) % 255, 0])
+                            client.sendJson([108, type, (realAngle - Cheat_Settings.AutoSpike.extra + 255) % 255, 0])
                         
                     break;
     
@@ -58740,9 +58739,7 @@ globalThis.LoadNewClient = () => {
     
     }
 
-    setInterval(() => {
-        AutoSpike()
-    }, 150)
+
  
     window.onload = () => {
        //evelAccountsAPI.initGoogleAPI()
