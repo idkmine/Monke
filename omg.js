@@ -3,7 +3,7 @@ globalThis.LoadNewClient = () => {
     let Cookies;
     let drawShit;
 
-    var Cheat_Settings = {
+    window.window.Cheat_Settings = {
         AutoRespawn: {
             enabled: true,
             Delay: 1000,
@@ -95,106 +95,6 @@ globalThis.LoadNewClient = () => {
 
           return 0
     };
-
-    let UtilsUI = {
-        initUI: () => {
-            let container = document.body;
-            let gui = new guify({
-                title: 'Hello World',
-                theme: {
-                    name: "LOUX",
-                    colors: {
-                        panelBackground: "rgb(0,0,0)",
-                        componentBackground: "rgb(3, 16, 34)",
-                        componentForeground: "rgb(62, 125, 215)",
-                        textPrimary: "rgb(0, 255, 255)",
-                        textSecondary: "rgb(255,255,255)",
-                        textHover: "rgb(43, 16, 159)"
-                    },
-                    font: {
-                        fontFamily: "Baloo Paaji",
-                        fontSize: "15px",
-                        fontWeight: "1"
-                    }
-                },
-                align: "right",
-                width: 550,
-                barMode: "none",
-                panelMode: "none",
-                xopacity: .6,
-                root: container,
-                open: !1
-            });
-
-
-            gui.Register({type: 'folder',label: 'Visuals',open: false});
-            gui.Register({type: 'folder',label: 'Misc',open: false});
-            gui.Register({type: 'folder',label: 'Binds',open: false});
-
-            gui.Register([
-                {type: 'checkbox',label: 'Colored Spikes',object: Cheat_Settings.ColoredSpikes , property: 'enabled',onChange: data => {
-                    console.log('hm')
-                    UtilsUI.saveSettings();
-                }},
-                {type: 'checkbox',label: 'Roofs Xray',object: Cheat_Settings.RoofsXray, property: 'enabled',onChange: data => {UtilsUI.saveSettings();}},
-            ],{folder: "Visuals"});
-
-
-            gui.Register([
-                {type: "checkbox",label: "Auto Respawn",object: Cheat_Settings.AutoRespawn, property: "enabled" ,onChange(e) {UtilsUI.saveSettings();}},
-            ],{folder: "Misc"});
-
-
-
-            gui.Register([
-            ],{folder: "Misc"});
-
-
-
-            gui.Register([
-                {type: 'text',label: 'AutoSpike Key:',object: Cheat_Settings.AutoSpike,property: 'key'},
-                {type: 'button',label: 'Set AutoSpike Key',action: data => {UtilsUI.controls.setKeyBind('AutoSpike'); UtilsUI.saveSettings();}},
-            ],{folder: "Binds"});
-
-        },
-        controls: null,
-        controller: class {
-            setKeyBind(callback) {
-                Settings[callback].key = 'Press any key';
-                let click = 0;
-                document.addEventListener('keydown',function abc(event) {
-                    click++;
-                    if (click >= 1) {
-                        if (event.code == "Escape") {
-                            Cheat_Settings[callback].key = "NONE";
-                        } else {
-                            Cheat_Settings[callback].key = event.code;
-                        };
-                        document.removeEventListener('keydown',abc);
-                        UtilsUI.saveSettings();
-                    };
-                });
-            }
-        },
-        saveSettings: () => {
-            for (let HACK in Cheat_Settings) {
-                localStorage.setItem(HACK + "ZMX",JSON.stringify(Cheat_Settings[HACK]));
-            };
-        },
-        loadSettings: () => {
-            for (let HACK in Cheat_Settings) {
-                let data = localStorage.getItem(HACK);
-                if (data) Cheat_Settings[HACK] = JSON.parse(data);
-            };
-        },
-        LoadHack: () => {
-            UtilsUI.loadSettings();
-            UtilsUI.controls = new UtilsUI.controller();
-            UtilsUI.initUI();
-            UtilsUI.saveSettings();
-        },
-    };
-    UtilsUI.LoadHack();
 
 
 
@@ -43958,32 +43858,32 @@ globalThis.LoadNewClient = () => {
        }
        var spike = world.units[ITEMS.SPIKE];
        for (var i = 0; i < spike.length; i++) {
-        draw_transition(spike[i], Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 1e4 : 10001) : SPRITE.SPIKE);
+        draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 1e4 : 10001) : SPRITE.SPIKE);
            spike[i].draw_life(spike[i].info);
        }
        var spike = world.units[ITEMS.STONE_SPIKE];
        for (var i = 0; i < spike.length; i++) {
-           draw_transition(spike[i], Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10002 : 10003) : SPRITE.STONE_SPIKE);
+           draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10002 : 10003) : SPRITE.STONE_SPIKE);
            spike[i].draw_life(spike[i].info);
        }
        var spike = world.units[ITEMS.GOLD_SPIKE];
        for (var i = 0; i < spike.length; i++) {
-           draw_transition(spike[i], Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10004 : 10005) : SPRITE.GOLD_SPIKE);
+           draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10004 : 10005) : SPRITE.GOLD_SPIKE);
            spike[i].draw_life(spike[i].info);
        }
        var spike = world.units[ITEMS.DIAMOND_SPIKE];
        for (var i = 0; i < spike.length; i++) {
-           draw_transition(spike[i], Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10006 : 10007) : SPRITE.DIAMOND_SPIKE);
+           draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10006 : 10007) : SPRITE.DIAMOND_SPIKE);
            spike[i].draw_life(spike[i].info);
        }
        var spike = world.units[ITEMS.AMETHYST_SPIKE];
        for (var i = 0; i < spike.length; i++) {
-           draw_transition(spike[i], Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10008 : 10009) : SPRITE.AMETHYST_SPIKE);
+           draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10008 : 10009) : SPRITE.AMETHYST_SPIKE);
            spike[i].draw_life(spike[i].info);
        }
        var spike = world.units[ITEMS.REIDITE_SPIKE];
        for (var i = 0; i < spike.length; i++) {
-           draw_transition(spike[i], Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10010 : 10011) : SPRITE.REIDITE_SPIKE);
+           draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10010 : 10011) : SPRITE.REIDITE_SPIKE);
            spike[i].draw_life(spike[i].info);
        }
        var well = world.units[ITEMS.WELL];
@@ -47186,9 +47086,9 @@ globalThis.LoadNewClient = () => {
           user.die.kill = kill;
           this.new_alert(LANG[TEXT.YOU_DEAD]);
 
-          if (Cheat_Settings.AutoRespawn.enabled){
+          if (window.Cheat_Settings.AutoRespawn.enabled){
             (this._current_id == this.socket._current_id) && (this._current_id++, this.socket.close())
-            setTimeout(() =>{this.connect()}, Cheat_Settings.AutoRespawn.timer)
+            setTimeout(() =>{this.connect()}, window.Cheat_Settings.AutoRespawn.timer)
             return;
         }
  
@@ -56796,9 +56696,9 @@ globalThis.LoadNewClient = () => {
           this.draw_UI();
        };
        this.trigger_keyup = function (evt) {
-        if(evt.code == Cheat_Settings.AutoSpike.key)
+        if(evt.code == window.Cheat_Settings.AutoSpike.key)
         {
-            Cheat_Settings.AutoSpike.key && !user.chat.open && !user.terminal.open && (Cheat_Settings.AutoSpike.enabled = !1)
+            window.Cheat_Settings.AutoSpike.key && !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSpike.enabled = !1)
         }
           if (user.chat.open && (evt.keyCode === 27))
              user.chat.quit();
@@ -56832,9 +56732,9 @@ globalThis.LoadNewClient = () => {
        };
        this.trigger_keydown = function (evt) {
           keyboard.down(evt);
-          if(evt.code == Cheat_Settings.AutoSpike.key)
+          if(evt.code == window.Cheat_Settings.AutoSpike.key)
           {
-              Cheat_Settings.AutoSpike.key && !user.chat.open && !user.terminal.open && (Cheat_Settings.AutoSpike.enabled = !0)
+              window.Cheat_Settings.AutoSpike.key && !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSpike.enabled = !0)
           }
 
           if (((evt.keyCode == 8) && !user.chat.open) && !user.terminal.open)
@@ -58657,9 +58557,9 @@ globalThis.LoadNewClient = () => {
  
     function draw(timestamp) {
        requestAnimationFrame(draw);
-       if(Date.now() - Cheat_Settings.AutoSpike.last_send > Cheat_Settings.AutoSpike.Delay){
+       if(Date.now() - window.Cheat_Settings.AutoSpike.last_send > window.Cheat_Settings.AutoSpike.Delay){
             AutoSpike()
-            Cheat_Settings.AutoSpike.last_send = Date.now()
+            window.Cheat_Settings.AutoSpike.last_send = Date.now()
        }
        delta = (timestamp - old_timestamp) / 1000;
        old_timestamp = timestamp;
@@ -58685,8 +58585,8 @@ globalThis.LoadNewClient = () => {
         if(user.build.wait) return;
         let myPlayer = world.fast_units[user.uid];
     
-        if (Cheat_Settings.AutoSpike.enabled) {
-            for (let e = 0, o = Cheat_Settings.AutoSpike.preferences; e < o.length; e++) {
+        if (window.Cheat_Settings.AutoSpike.enabled) {
+            for (let e = 0, o = window.Cheat_Settings.AutoSpike.preferences; e < o.length; e++) {
                 var i = o[e];
                 switch (i) {
                     case "Reidite Spike":
@@ -58722,17 +58622,17 @@ globalThis.LoadNewClient = () => {
     
             if (type) {
                 let pi2 = Math.PI * 2, realAngle = Math.floor((((myPlayer.angle + pi2) % pi2) * 255) / pi2);
-                switch (Cheat_Settings.AutoSpike.mode) {
+                switch (window.Cheat_Settings.AutoSpike.mode) {
                     case 0: 
                         client.sendJson([102, type, realAngle, 0])
                     break;
     
                     case 1:
-                        for (var i = 0; i < Cheat_Settings.AutoSpike.extra; i++)
+                        for (var i = 0; i < window.Cheat_Settings.AutoSpike.extra; i++)
                             window.antiCheatMouseDown({isTrusted: true});
                             client.sendJson([102, type, realAngle, 0])
-                            client.sendJson([102, type, (realAngle + Cheat_Settings.AutoSpike.extra) % 255, 0])
-                            client.sendJson([102, type, (realAngle - Cheat_Settings.AutoSpike.extra + 255) % 255, 0])
+                            client.sendJson([102, type, (realAngle + window.Cheat_Settings.AutoSpike.extra) % 255, 0])
+                            client.sendJson([102, type, (realAngle - window.Cheat_Settings.AutoSpike.extra + 255) % 255, 0])
                         
                     break;
     
