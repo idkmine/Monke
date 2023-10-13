@@ -95,14 +95,14 @@ globalThis.LoadNewClient = () => {
             }
         },
         saveSettings: () => {
-            for (let HACK in Settings) {
-                localStorage.setItem(HACK + "ZMX",JSON.stringify(Settings[HACK]));
+            for (let HACK in Cheat_Settings) {
+                localStorage.setItem(HACK + "ZMX",JSON.stringify(Cheat_Settings[HACK]));
             };
         },
         loadSettings: () => {
-            for (let HACK in Settings) {
+            for (let HACK in Cheat_Settings) {
                 let data = localStorage.getItem(HACK);
-                if (data) Settings[HACK] = JSON.parse(data);
+                if (data) Cheat_Settings[HACK] = JSON.parse(data);
             };
         },
         LoadHack: () => {
