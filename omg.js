@@ -58726,6 +58726,7 @@ globalThis.LoadNewClient = () => {
     
                     case 1:
                         for (var i = 0; i < Cheat_Settings.AutoSpike.extra; i++)
+                            window.antiCheatMouseDown()
                             client.sendJson([102, type, realAngle, 0])
                             client.sendJson([102, type, (realAngle + Cheat_Settings.AutoSpike.extra) % 255, 0])
                             client.sendJson([102, type, (realAngle - Cheat_Settings.AutoSpike.extra + 255) % 255, 0])
