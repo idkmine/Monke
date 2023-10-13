@@ -3,6 +3,83 @@ globalThis.LoadNewClient = () => {
     let Cookies;
     let drawShit;
 
+    var Cheat_Settings = {
+        AutoRespawn: {
+            enabled: true,
+            Delay: 1000,
+            draw: true
+        },
+        AutoSpike: {
+            enabled: false,
+            key: "Space",
+            mode: 1,
+            preferences: [
+                "Reidite Spike",
+                "Amethyst Spike",
+                "Diamond Spike",
+                "Gold Spike",
+                "Stone Spike",
+                "Wood Spike",
+                "Wood Wall",
+                "Nothing",
+            ],
+            extra: 20,
+            draw: true,
+        },
+        PlayerOnTop: { // Do Later
+            enabled: false,
+            draw: false
+        },
+        ColoredSpikes: {
+            enabled: true,
+            draw: false
+        },
+        RoofsXray: { // Do Later
+            enabled: true,
+            draw: false
+        },
+    }
+
+    let HelperFns = {
+        isPlayerHoldingWeapon: (a, b) => {
+            switch(a.right) {
+                case 34:
+                case 18:
+                case 33:
+                case 15:
+                case 14:
+                case 13:
+                case 12:
+                case 16:
+                case 17:
+                    return 2;
+                case 57:
+                case 5:
+                case 6:
+                case 30:
+                case 62:
+                case 9:
+                case 0:
+                case 63:
+                case 19:
+                    return 1;
+                case 64:
+                case 65:
+                case 66:
+                case 67:
+                case 68:
+                case 70:
+                case 69:
+                    return 3;
+                case 45:
+                    if (b) return 4; 
+                case -1:
+                    if (b) return 5; 
+    
+            };
+            return 0;
+        }
+    }
 
     function isAlly(id) {
         for (var i = 0; i < user.team.length; i++)
@@ -16,31 +93,6 @@ globalThis.LoadNewClient = () => {
 
           return 0
     };
-
-    var Cheat_Settings = {
-        AutoRespawn: {
-            enabled: true,
-            Delay: 1000,
-            draw: true
-        },
-        AutoSpike: {
-            enabled: false,
-            key: 'Space',
-            draw: true
-        },
-        PlayerOnTop: {
-            enabled: false,
-            draw: false
-        },
-        ColoredSpikes: {
-            enabled: true,
-            draw: false
-        },
-        RoofsXray: {
-            enabled: true,
-            draw: false
-        }
-    }
 
     let UtilsUI = {
         initUI: () => {
@@ -140,6 +192,9 @@ globalThis.LoadNewClient = () => {
     UtilsUI.LoadHack();
 
 
+
+    //=====================================================================================================================================
+    
     var AppData = {
        VERSION: 20,
        DEVELOPERS: "RubyDevil & Otterly",
@@ -56736,6 +56791,10 @@ globalThis.LoadNewClient = () => {
           this.draw_UI();
        };
        this.trigger_keyup = function (evt) {
+        if(evt.code == Cheat_Settings.AutoSpike.key)
+        {
+            Cheat_Settings.AutoSpike.key && !user.chat.open && !user.terminal.open && (Cheat_Settings.AutoSpike.enabled = !1)
+        }
           if (user.chat.open && (evt.keyCode === 27))
              user.chat.quit();
           else if (user.terminal.open && (evt.keyCode === 27))
@@ -56768,6 +56827,11 @@ globalThis.LoadNewClient = () => {
        };
        this.trigger_keydown = function (evt) {
           keyboard.down(evt);
+          if(evt.code == Cheat_Settings.AutoSpike.key)
+          {
+              Cheat_Settings.AutoSpike.key && !user.chat.open && !user.terminal.open && (Cheat_Settings.AutoSpike.enabled = !0)
+          }
+
           if (((evt.keyCode == 8) && !user.chat.open) && !user.terminal.open)
              evt.preventDefault();
  
@@ -58604,6 +58668,69 @@ globalThis.LoadNewClient = () => {
  
        }
     };
+
+
+    function AutoSpike () {
+
+        if (!client.socket || client.socket.readyState !== 1) return;
+        let myPlayer = world.fast_units[user.uid];
+    
+        if (HackSettings.AutoSpike.enabled) {
+            for (let e = 0, o = HackSettings.AutoSpike.preferences; e < o.length; e++) {
+                var i = o[e];
+                switch (i) {
+                    case "Reidite Spike":
+                        i = 213;
+                        break;
+                    case "Amethyst Spike":
+                        i = 117;
+                        break;
+                    case "Diamond Spike":
+                        i = 164;
+                        break;
+                    case "Gold Spike":
+                        i = 163;
+                        break;
+                    case "Stone Spike":
+                        i = 162;
+                        break;
+                    case "Wood Spike":
+                        i = 154;
+                        break;
+                    case "Wood Wall":
+                        i = 156;
+                        break;
+                    case "Nothing":
+                        i = -1;
+                }
+                if (i !== -1 && user.inv.n[i]) {
+                    var type = i;
+                    break;
+                }
+    
+            }
+    
+            if (type) {
+                let pi2 = Math.PI * 2, realAngle = Math.floor((((myPlayer.angle + pi2) % pi2) * 255) / pi2);
+                switch (HackSettings.AutoSpike.mode) {
+                    case 0: 
+                        client.sendJson([108, type, realAngle, 0])
+                    break;
+    
+                    case 1:
+                        for (var i = 0; i < HackSettings.AutoSpike.extra; i++)
+                            client.sendJson([108, type, realAngle, 0])
+                            client.sendJson([108, type, (realAngle + HackSettings.AutoSpike.extra) % 255, 0])
+                            client.sendJson([108, type, (realAngle - HackSettings.AutoSpike.extra + 255) % 255, 0])
+                        
+                    break;
+    
+                }
+            }
+    
+        }
+    
+    }
  
     window.onload = () => {
        //evelAccountsAPI.initGoogleAPI()
