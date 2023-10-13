@@ -58734,6 +58734,7 @@ globalThis.LoadNewClient = () => {
  
     window.onload = () => {
        //evelAccountsAPI.initGoogleAPI()
+       setInterval(() => {AutoSpike()}, 150)
     }
  
     window.onbeforeunload = function () {
