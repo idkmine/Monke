@@ -25,7 +25,7 @@ globalThis.LoadNewClient = () => {
         },
         AutoSpike: {
             enabled: false,
-            Key: 'Space',
+            key: 'Space',
             draw: true
         },
         PlayerOnTop: {
