@@ -4,7 +4,7 @@ globalThis.LoadNewClient = () => {
     let drawShit;
 
 
-    function checkAlly(id) {
+    function isAlly(id) {
         for (var i = 0; i < user.team.length; i++)
             if (user.team[i] === id){
                    return 1;
@@ -47023,7 +47023,7 @@ globalThis.LoadNewClient = () => {
           user.die.kill = kill;
           this.new_alert(LANG[TEXT.YOU_DEAD]);
 
-          if (Cheat_Settings.Respawn.enabled){
+          if (Cheat_Settings.AutoRespawn.enabled){
             (this._current_id == this.socket._current_id) && (this._current_id++, this.socket.close())
             setTimeout(() =>{this.connect()}, Cheat_Settings.AutoRespawn.timer)
             return;
