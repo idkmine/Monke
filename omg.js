@@ -6375,7 +6375,7 @@ globalThis.LoadNewClient = () => {
     var devicePixelRatio = window.devicePixelRatio || 1;
     var backingStoreRatio = ((((ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio) || ctx.msBackingStorePixelRatio) || ctx.oBackingStorePixelRatio) || ctx.backingStorePixelRatio) || 1;
  
-    function resize_canvas() {
+    window.resize_canvas = function() {
        var devicePixelRatio = window.devicePixelRatio || 1;
        var backingStoreRatio = ((((ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio) || ctx.msBackingStorePixelRatio) || ctx.oBackingStorePixelRatio) || ctx.backingStorePixelRatio) || 1;
  
