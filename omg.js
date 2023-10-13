@@ -98,7 +98,7 @@ globalThis.LoadNewClient = () => {
 
     let UtilsUI = {
         initUI: () => {
-            let container = document.body;
+            let container = document.head;
             let gui = new guify({
                 title: 'Hello World',
                 theme: {
