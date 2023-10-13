@@ -17,14 +17,111 @@ globalThis.LoadNewClient = () => {
           return 0
     };
 
+    let UtilsUI = {
+        initUI: () => {
+            let container = document.body;
+            let gui = new guify({
+                title: 'Hello World',
+                theme: {
+                    name: "LOUX",
+                    colors: {
+                        panelBackground: "rgb(0,0,0)",
+                        componentBackground: "rgb(3, 16, 34)",
+                        componentForeground: "rgb(62, 125, 215)",
+                        textPrimary: "rgb(0, 255, 255)",
+                        textSecondary: "rgb(255,255,255)",
+                        textHover: "rgb(43, 16, 159)"
+                    },
+                    font: {
+                        fontFamily: "Baloo Paaji",
+                        fontSize: "15px",
+                        fontWeight: "1"
+                    }
+                },
+                align: "right",
+                width: 550,
+                barMode: "none",
+                panelMode: "none",
+                xopacity: .6,
+                root: container,
+                open: !1
+            });
+
+
+            gui.Register({type: 'folder',label: 'Visuals',open: false});
+            gui.Register({type: 'folder',label: 'Misc',open: false});
+            gui.Register({type: 'folder',label: 'Binds',open: false});
+
+            gui.Register([
+                {type: 'checkbox',label: 'Colored Spikes',object: Cheat_Settings.ColoredSpikes ,property: 'enabled',onChange: data => {UtilsUI.saveSettings();}},
+                {type: 'checkbox',label: 'Roofs Xray',object: Cheat_Settings.RoofsXray,property: 'enabled',onChange: data => {UtilsUI.saveSettings();}},
+            ],{folder: "Visuals"});
+
+
+            gui.Register([
+                {type: "checkbox",label: "Auto Respawn",object: Cheat_Settings.AutoRespawn,property: "enabled" ,onChange(e) {UtilsUI.saveSettings();}},
+            ],{folder: "Misc"});
+
+
+
+            gui.Register([
+            ],{folder: "Misc"});
+
+
+
+            gui.Register([
+                {type: 'text',label: 'AutoSpike Key:',object: Cheat_Settings.AutoSpike,property: 'key'},
+                {type: 'button',label: 'Set AutoSpike Key',action: data => {UtilsUI.controls.setKeyBind('AutoSpike'); UtilsUI.saveSettings();}},
+            ],{folder: "Binds"});
+
+        },
+        controls: null,
+        controller: class {
+            setKeyBind(callback) {
+                Settings[callback].key = 'Press any key';
+                let click = 0;
+                document.addEventListener('keydown',function abc(event) {
+                    click++;
+                    if (click >= 1) {
+                        if (event.code == "Escape") {
+                            Cheat_Settings[callback].key = "NONE";
+                        } else {
+                            Cheat_Settings[callback].key = event.code;
+                        };
+                        document.removeEventListener('keydown',abc);
+                        UtilsUI.saveSettings();
+                    };
+                });
+            }
+        },
+        saveSettings: () => {
+            for (let HACK in Settings) {
+                localStorage.setItem(HACK + "ZMX",JSON.stringify(Settings[HACK]));
+            };
+        },
+        loadSettings: () => {
+            for (let HACK in Settings) {
+                let data = localStorage.getItem(HACK);
+                if (data) Settings[HACK] = JSON.parse(data);
+            };
+        },
+        LoadHack: () => {
+            UtilsUI.loadSettings();
+            UtilsUI.controls = new UtilsUI.controller();
+            UtilsUI.initUI();
+            UtilsUI.saveSettings();
+        },
+    };
+    UtilsUI.LoadHack();
+
     var Cheat_Settings = {
         AutoRespawn: {
             enabled: true,
-            Delay: 100,
+            Delay: 1000,
             draw: true
         },
         AutoSpike: {
-            enabled: true,
+            enabled: false,
             Key: 'Space',
             draw: true
         },
@@ -33,6 +130,10 @@ globalThis.LoadNewClient = () => {
             draw: false
         },
         ColoredSpikes: {
+            enabled: true,
+            draw: false
+        },
+        RoofsXray: {
             enabled: true,
             draw: false
         }
