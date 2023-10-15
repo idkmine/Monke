@@ -40285,14 +40285,15 @@ globalThis.LoadNewClient = () => {
          var x = 0;
          var y = 0;
       };
-      if(Cheat_Settings.RoofsXray.enabled){
-         this.opacity = 0.4
-      } else {
+
       var len = sprite[SPRITE.ROOFS].length;
       img = sprite[SPRITE.ROOFS][(this.j + (this.i % 2)) % len][world.time];
       w = -img.width;
       h = -img.height;
       var p = world.fast_units[user.uid];
+      if(Cheat_Settings.RoofsXray.enabled){
+         this.opacity = Math.max(this.opacity - delta, 0.3);
+      } else {
       if (p && ((user.id === this.pid) || user.in_team(this.pid))) {
          if (Utils.dist(this, p) < 550)
             this.opacity = Math.max(this.opacity - delta, 0.3);
