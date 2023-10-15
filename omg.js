@@ -43740,37 +43740,37 @@ globalThis.LoadNewClient = () => {
       var door = world.units[ITEMS.WOOD_DOOR_SPIKE];
       for (var i = 0; i < door.length; i++) {
           if (door[i].extra == 0)
-          draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10012 : 10013) : SPRITE.WOOD_DOOR_SPIKE);
+          draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10012 : 10013) : SPRITE.WOOD_DOOR_SPIKE);
           door[i].draw_life(door[i].info);
       }
       var door = world.units[ITEMS.STONE_DOOR_SPIKE];
       for (var i = 0; i < door.length; i++) {
           if (door[i].extra == 0)
-          draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10014 : 10015) : SPRITE.STONE_DOOR_SPIKE);
+          draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10014 : 10015) : SPRITE.STONE_DOOR_SPIKE);
           door[i].draw_life(door[i].info);
       }
       var door = world.units[ITEMS.GOLD_DOOR_SPIKE];
       for (var i = 0; i < door.length; i++) {
           if (door[i].extra == 0)
-          draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10016 : 10017) : SPRITE.GOLD_DOOR_SPIKE);
+          draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10016 : 10017) : SPRITE.GOLD_DOOR_SPIKE);
           door[i].draw_life(door[i].info);
       }
       var door = world.units[ITEMS.DIAMOND_DOOR_SPIKE];
       for (var i = 0; i < door.length; i++) {
           if (door[i].extra == 0)
-          draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10018 : 10019) : SPRITE.DIAMOND_DOOR_SPIKE);
+          draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10018 : 10019) : SPRITE.DIAMOND_DOOR_SPIKE);
           door[i].draw_life(door[i].info);
       }
       var door = world.units[ITEMS.AMETHYST_DOOR_SPIKE];
       for (var i = 0; i < door.length; i++) {
           if (door[i].extra == 0)
-          draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10020 : 10021) : SPRITE.AMETHYST_DOOR_SPIKE);
+          draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10020 : 10021) : SPRITE.AMETHYST_DOOR_SPIKE);
           door[i].draw_life(door[i].info);
       }
       var door = world.units[ITEMS.REIDITE_DOOR_SPIKE];
       for (var i = 0; i < door.length; i++) {
           if (door[i].extra == 0)
-          draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10022 : 10023) : SPRITE.REIDITE_DOOR_SPIKE);
+          draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10022 : 10023) : SPRITE.REIDITE_DOOR_SPIKE);
           door[i].draw_life(door[i].info);
       }
       var wall = world.units[ITEMS.WALL];
