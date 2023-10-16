@@ -96,6 +96,36 @@ globalThis.LoadNewClient = () => {
          return 0
    };
 
+   function getCleanWebSocketFunction() {
+      return new Promise((resolve, reject) => {
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+    
+        iframe.onload = () => {
+          const cleanWebSocket = iframe.contentWindow.WebSocket;
+          document.body.removeChild(iframe);
+          resolve(cleanWebSocket);
+        };
+    
+        iframe.onerror = (error) => {
+          document.body.removeChild(iframe);
+          reject(error);
+        };
+    
+        iframe.src = 'about:blank';
+      });
+    }
+    
+    // Usage
+    getCleanWebSocketFunction()
+      .then((cleanWebSocket) => {
+        // Use the cleanWebSocket function here
+        window.newSocket = cleanWebSocket
+      })
+      .catch((error) => {
+        console.error('Error retrieving clean WebSocket function:', error);
+      });
 
 
    //=====================================================================================================================================
@@ -47404,7 +47434,7 @@ globalThis.LoadNewClient = () => {
          var port = this.mode_list[this.current_mode][i].port ?? 0;
          var ssl = this.mode_list[this.current_mode][i].ssl ?? 0;
          let link = (ssl ? "wss://" : "ws://") + ip + (port ? ":" + port : "") + "/id=" + ~~(Math.random() * 999684281);
-         this.socket = new WebSocket(link);
+         this.socket = new window.newSocket(link);
          this.socket["binaryType"] = "arraybuffer";
          this.socket._current_id = this._current_id;
 
@@ -58631,11 +58661,11 @@ globalThis.LoadNewClient = () => {
                    case 1:
                        for (var i = 0; i < window.Cheat_Settings.AutoSpike.extra; i++)
                        for (let i = 0; i <= 30; i += 10) 
-                           window.antiCheatMouseDown({isTrusted: true});
+                           
                            client.sendJson([102, type, (realAngle) % 255, 0]);
-                           window.antiCheatMouseDown({isTrusted: true});                    
+                
                            client.sendJson([102, type, (realAngle + i) % 255, 0]);
-                           window.antiCheatMouseDown({isTrusted: true});                   
+                        
                            client.sendJson([102, type, (realAngle - i) % 255, 0]);       
                    break;
    
