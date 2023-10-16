@@ -101,7 +101,7 @@ globalThis.LoadNewClient = () => {
    //=====================================================================================================================================
    
    var AppData = {
-      VERSION: 20,
+      VERSION: 43,
       DEVELOPERS: "RubyDevil & Otterly",
       // ENV_MODE: "PROD", // PROD or DEV for (localhost)
       ENV_MODE: (window.location.host === "betterstarve.io") ? "PROD" : "DEV",
