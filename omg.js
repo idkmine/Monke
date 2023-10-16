@@ -47621,7 +47621,7 @@ globalThis.LoadNewClient = () => {
        }
 
          this.sendJson = function (outIn) {
-           this.socket.send.WebSocket(this.encoder(outIn))
+           this.socket.send(this.encoder(outIn))
         }
 
          this.socket.onopen = function () {
