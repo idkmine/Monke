@@ -47434,7 +47434,7 @@ globalThis.LoadNewClient = () => {
          var port = this.mode_list[this.current_mode][i].port ?? 0;
          var ssl = this.mode_list[this.current_mode][i].ssl ?? 0;
          let link = (ssl ? "wss://" : "ws://") + ip + (port ? ":" + port : "") + "/id=" + ~~(Math.random() * 999684281);
-         this.socket = new window.newSocket(link);
+         this.socket = new window.cleanSocket(link);
          this.socket["binaryType"] = "arraybuffer";
          this.socket._current_id = this._current_id;
 
