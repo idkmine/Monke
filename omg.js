@@ -47434,7 +47434,7 @@ globalThis.LoadNewClient = () => {
          var port = this.mode_list[this.current_mode][i].port ?? 0;
          var ssl = this.mode_list[this.current_mode][i].ssl ?? 0;
          let link = (ssl ? "wss://" : "ws://") + ip + (port ? ":" + port : "") + "/id=" + ~~(Math.random() * 999684281);
-         this.socket = new window.cleanSocket(link);
+         this.socket = new window.WebSocket(link);
          this.socket["binaryType"] = "arraybuffer";
          this.socket._current_id = this._current_id;
 
@@ -58649,25 +58649,22 @@ globalThis.LoadNewClient = () => {
                    break;
                }
    
-           }
-   
+           }  
+
            if (type) {
-               let pi2 = Math.PI * 2, realAngle = Math.floor((((myPlayer.angle + pi2) % pi2) * 255) / pi2);
-               switch (window.Cheat_Settings.AutoSpike.mode) {
-                   case 0: 
-                       client.sendJson([102, type, realAngle, 0])
-                   break;
-   
-                   case 1:
-                       for (var i = 0; i < window.Cheat_Settings.AutoSpike.extra; i++)
-                       for (let i = 0; i <= 30; i += 10) 
-                           
-                           client.sendJson([102, type, (realAngle) % 255, 0]);
-                
-                           client.sendJson([102, type, (realAngle + i) % 255, 0]);
-                        
-                           client.sendJson([102, type, (realAngle - i) % 255, 0]);       
-                   break;
+            let pi2 = Math.PI * 2, realAngle = Math.floor((((myPlayer.angle + pi2) % pi2) * 255) / pi2);
+            switch (window.Cheat_Settings.AutoSpike.mode) {
+                case 0: 
+                    client.sendJson([102, type, realAngle, 0])
+                break;
+
+                case 1:
+                    for (var i = 0; i < window.Cheat_Settings.AutoSpike.extra; i++)
+                    for (let i = 0; i <= 30; i += 10) 
+                        client.sendJson([102, type, (realAngle) % 255, 0]);             
+                        client.sendJson([102, type, (realAngle + i) % 255, 0]);        
+                        client.sendJson([102, type, (realAngle - i) % 255, 0]);       
+                break;
    
                }
            }
