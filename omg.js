@@ -9,6 +9,14 @@ globalThis.LoadNewClient = () => {
            Delay: 1000,
            draw: true
        },
+       AutoSteal: {
+           enabled: false,
+           key: 'ShiftLeft',
+           Delay: 1,
+           lastSend: Date.now(),
+           Distance: 200,
+           draw: true
+       },
        AutoSpike: {
            enabled: false,
            key: "Space",
@@ -25,62 +33,50 @@ globalThis.LoadNewClient = () => {
            ],
            extra: 20,
            draw: true,
-           Delay: 70,
+           Delay: 50,
            last_send: Date.now()
        },
-       PlayerOnTop: { // Do Later
-           enabled: false,
+       PlayerOnTop: { 
+           enabled: true,
            draw: false
        },
        ColoredSpikes: {
            enabled: true,
            draw: false
        },
-       RoofsXray: { // Do Later
+       RoofsXray: {
            enabled: true,
            draw: false
        },
+       Visuals: {
+            Draw_Box_Info: true,
+       }
    }
 
-   let HelperFns = {
-       isPlayerHoldingWeapon: (a, b) => {
-           switch(a.right) {
-               case 34:
-               case 18:
-               case 33:
-               case 15:
-               case 14:
-               case 13:
-               case 12:
-               case 16:
-               case 17:
-                   return 2;
-               case 57:
-               case 5:
-               case 6:
-               case 30:
-               case 62:
-               case 9:
-               case 0:
-               case 63:
-               case 19:
-                   return 1;
-               case 64:
-               case 65:
-               case 66:
-               case 67:
-               case 68:
-               case 70:
-               case 69:
-                   return 3;
-               case 45:
-                   if (b) return 4; 
-               case -1:
-                   if (b) return 5; 
-   
-           };
-           return 0;
-       }
+   let Hack_Utils = {
+      Distance: function(obj1, obj2){
+         return Math.sqrt((obj2.x - obj1.x) ** 2 + (obj2.y - obj1.y) ** 2);
+      },
+
+      Draw_Chest_Inventory: function(chest){
+
+      },
+
+      createText: function(text, fillColor, x, y, fontSize, strokeWidth, rotation = 0) {
+         let canvas = document.getElementById('game_canvas');
+         let ctx = canvas.getContext('2d');
+         ctx.save();
+         ctx.beginPath();
+         ctx.rotate(rotation);
+         let textMetrics = ctx.measureText(text);
+         ctx.font = fontSize + "px Baloo Paaji";
+         ctx.strokeStyle = "black";
+         ctx.lineWidth = strokeWidth;
+         ctx.fillStyle = fillColor;
+         ctx.strokeText(text, x - textMetrics.width, y);
+         ctx.fillText(text, x - textMetrics.width, y);
+         ctx.restore();
+       }       
    }
 
    function isAlly(id) {
@@ -96,42 +92,12 @@ globalThis.LoadNewClient = () => {
          return 0
    };
 
-   function getCleanWebSocketFunction() {
-      return new Promise((resolve, reject) => {
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
-    
-        iframe.onload = () => {
-          const cleanWebSocket = iframe.contentWindow.WebSocket;
-          document.body.removeChild(iframe);
-          resolve(cleanWebSocket);
-        };
-    
-        iframe.onerror = (error) => {
-          document.body.removeChild(iframe);
-          reject(error);
-        };
-    
-        iframe.src = 'about:blank';
-      });
-    }
-    
-    // Usage
-    getCleanWebSocketFunction()
-      .then((cleanWebSocket) => {
-        // Use the cleanWebSocket function here
-        window.newSocket = cleanWebSocket
-      })
-      .catch((error) => {
-        console.error('Error retrieving clean WebSocket function:', error);
-      });
 
 
    //=====================================================================================================================================
    
    var AppData = {
-      VERSION: 43,
+      VERSION: 20,
       DEVELOPERS: "RubyDevil & Otterly",
       // ENV_MODE: "PROD", // PROD or DEV for (localhost)
       ENV_MODE: (window.location.host === "betterstarve.io") ? "PROD" : "DEV",
@@ -40958,6 +40924,17 @@ globalThis.LoadNewClient = () => {
          ctxDrawImage(ctx, hurt, -w / 2, -h / 2, w, h);
          ctx.globalAlpha = 1;
       }
+
+      if(window.Cheat_Settings.visuals.Draw_Box_Info){
+         let Hits = 500
+         let Type = (this.type == 82)
+         let time = Date.now()
+
+         Hack_Utils.createText(Hits + "Hits", "white", 0, 25, 18, 7, -this.angle)
+         Hack_Utils.createText(Type ? "Dead" : "Drop", "white", 0, -15, 18, 7, -this.angle)
+         Hack_Utils.createText(Type ? ((this.info >= 49 && this.info <= 57 ? 30 : 240) - (Date.now() - time) / 1e3).toFixed(1) + "s" : (16.2 - (Date.now() - time) / 1e3).toFixed(1) + "s", "white", 0, 45, 18, 7, -this.angle)
+      }
+
       ctx.restore();
    };
 
@@ -43517,12 +43494,6 @@ globalThis.LoadNewClient = () => {
       var wheat = world.units[ITEMS.WHEAT_SEED];
       for (var i = 0; i < wheat.length; i++)
          draw_transition(wheat[i]);
-      var crate = world.units[ITEMS.CRATE];
-      for (var i = 0; i < crate.length; i++)
-         draw_transition(crate[i], SPRITE.CRATE, SPRITE.HURT_DEAD_BOX);
-      var dead_box = world.units[ITEMS.DEAD_BOX];
-      for (var i = 0; i < dead_box.length; i++)
-         draw_transition(dead_box[i], SPRITE.CRATE, SPRITE.HURT_DEAD_BOX);
       var gift = world.units[ITEMS.GIFT];
       for (var i = 0; i < gift.length; i++)
          draw_transition(gift[i], SPRITE.GIFT, SPRITE.HURT_GIFT);
@@ -43714,8 +43685,28 @@ globalThis.LoadNewClient = () => {
 
       }
       var chest = world.units[ITEMS.CHEST];
-      for (var i = 0; i < chest.length; i++)
+      for (var i = 0; i < chest.length; i++){
          draw_transition(chest[i]);
+         Hack_Utils.Draw_Chest_Inventory(chest[i]);
+
+         let myPlayer = world.fast_units[user.uid];
+
+         if(myPlayer){
+            if(window.Cheat_Settings.AutoSteal.enabled){
+               if(Date.now() - window.Cheat_Settings.AutoSteal.lastSend > window.Cheat_Settings.AutoSteal.Delay){
+                  if(!chest.lock || chest.ally){
+                        for(let i = 0; i < 10; i++){
+                           if(Hack_Utils.Distance(myPlayer, chest) < window.Cheat_Settings.AutoSteal.Distance){
+                              if(chest.info != 0 && chest.extra !== 1024){
+                                 client.take_chest(chest)
+                              }
+                           }
+                        }
+                  }
+               }
+            }
+         }
+      }
       var workbench = world.units[ITEMS.WORKBENCH];
       for (var i = 0; i < workbench.length; i++)
          draw_transition(workbench[i], SPRITE.WORKBENCH);
@@ -43839,7 +43830,7 @@ globalThis.LoadNewClient = () => {
           spike[i].draw_life(spike[i].info);
       }
       var spike = world.units[ITEMS.STONE_SPIKE];
-      for (var i = 0; i < spike.length; i++) {
+      for (var i = 0; i < spike.length; i++) {  
           draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10002 : 10003) : SPRITE.STONE_SPIKE);
           spike[i].draw_life(spike[i].info);
       }
@@ -43950,12 +43941,23 @@ globalThis.LoadNewClient = () => {
       draw_map_transition(draw_map_objects, is, ie, js, je, SPRITE.TREE, "t", 1, 0);
       draw_map_transition(draw_map_objects, is, ie, js, je, SPRITE.FIR, "f", 0, 0);
       draw_map_transition(draw_map_objects, is, ie, js, je, SPRITE.PALM, "plm", 2, 2);
+
       var windmill = world.units[ITEMS.WINDMILL];
       for (var i = 0; i < windmill.length; i++)
          draw_fg_transition(windmill[i]);
+
       var tower = world.units[ITEMS.WOOD_TOWER];
       for (var i = 0; i < tower.length; i++)
          draw_transition(tower[i], SPRITE.WOOD_TOWER);
+
+      var crate = world.units[ITEMS.CRATE];
+      for (var i = 0; i < crate.length; i++)
+         draw_transition(crate[i], SPRITE.CRATE, SPRITE.HURT_DEAD_BOX);
+
+      var dead_box = world.units[ITEMS.DEAD_BOX];
+      for (var i = 0; i < dead_box.length; i++)
+         draw_transition(dead_box[i], SPRITE.CRATE, SPRITE.HURT_DEAD_BOX);
+
       var players = world.units[ITEMS.PLAYERS];
       for (var i = 0; i < players.length; i++) {
          var p = players[i];
@@ -47434,7 +47436,7 @@ globalThis.LoadNewClient = () => {
          var port = this.mode_list[this.current_mode][i].port ?? 0;
          var ssl = this.mode_list[this.current_mode][i].ssl ?? 0;
          let link = (ssl ? "wss://" : "ws://") + ip + (port ? ":" + port : "") + "/id=" + ~~(Math.random() * 999684281);
-         this.socket = new window.WebSocket(link);
+         this.socket = new WebSocket(link);
          this.socket["binaryType"] = "arraybuffer";
          this.socket._current_id = this._current_id;
 
@@ -56727,9 +56729,11 @@ globalThis.LoadNewClient = () => {
          this.draw_UI();
       };
       this.trigger_keyup = function (evt) {
-       if(evt.code == window.Cheat_Settings.AutoSpike.key)
-       {
+       if(evt.code == window.Cheat_Settings.AutoSpike.key){
            window.Cheat_Settings.AutoSpike.key && !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSpike.enabled = !1)
+       }
+       if(evt.code == window.Cheat_Settings.AutoSteal.key){
+           window.Cheat_Settings.AutoSteal.key && !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSteal.enabled = !1)
        }
          if (user.chat.open && (evt.keyCode === 27))
             user.chat.quit();
@@ -56763,9 +56767,11 @@ globalThis.LoadNewClient = () => {
       };
       this.trigger_keydown = function (evt) {
          keyboard.down(evt);
-         if(evt.code == window.Cheat_Settings.AutoSpike.key)
-         {
+         if(evt.code == window.Cheat_Settings.AutoSpike.key){
              window.Cheat_Settings.AutoSpike.key && !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSpike.enabled = !0)
+         }
+         if(evt.code == window.Cheat_Settings.AutoSteal.key){
+            !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSteal.enabled = !0)
          }
 
          if (((evt.keyCode == 8) && !user.chat.open) && !user.terminal.open)
@@ -58649,22 +58655,25 @@ globalThis.LoadNewClient = () => {
                    break;
                }
    
-           }  
-
+           }
+   
            if (type) {
-            let pi2 = Math.PI * 2, realAngle = Math.floor((((myPlayer.angle + pi2) % pi2) * 255) / pi2);
-            switch (window.Cheat_Settings.AutoSpike.mode) {
-                case 0: 
-                    client.sendJson([102, type, realAngle, 0])
-                break;
-
-                case 1:
-                    for (var i = 0; i < window.Cheat_Settings.AutoSpike.extra; i++)
-                    for (let i = 0; i <= 30; i += 10) 
-                        client.sendJson([102, type, (realAngle) % 255, 0]);             
-                        client.sendJson([102, type, (realAngle + i) % 255, 0]);        
-                        client.sendJson([102, type, (realAngle - i) % 255, 0]);       
-                break;
+               let pi2 = Math.PI * 2, realAngle = Math.floor((((myPlayer.angle + pi2) % pi2) * 255) / pi2);
+               switch (window.Cheat_Settings.AutoSpike.mode) {
+                   case 0: 
+                       client.sendJson([102, type, realAngle, 0])
+                   break;
+   
+                   case 1:
+                       for (var i = 0; i < window.Cheat_Settings.AutoSpike.extra; i++)
+                       for (let i = 0; i <= 30; i += 10) 
+                           window.antiCheatMouseDown({isTrusted: true});
+                           client.sendJson([102, type, (realAngle) % 255, 0]);
+                           window.antiCheatMouseDown({isTrusted: true});                    
+                           client.sendJson([102, type, (realAngle + i) % 255, 0]);
+                           window.antiCheatMouseDown({isTrusted: true});                   
+                           client.sendJson([102, type, (realAngle - i) % 255, 0]);       
+                   break;
    
                }
            }
