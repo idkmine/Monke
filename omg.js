@@ -40958,7 +40958,7 @@ globalThis.LoadNewClient = () => {
      if(window.Cheat_Settings.visuals.Draw_Box_Info){
         let Hits = this.hited
         let Type = (this.type == 82)
-        let time = Date.now()
+        let time = this.time
 
         Hack_Utils.createText(Hits + "Hits", "white", 0, 25, 18, 7, -this.angle)
         Hack_Utils.createText(Type ? "Dead" : "Drop", "white", 0, -15, 18, 7, -this.angle)
@@ -46593,7 +46593,7 @@ globalThis.LoadNewClient = () => {
             if (u.update)
                u.update(action);
 
-           if(action.HURT){
+           if(action == STATE.HURT){
                u.hited++
            }
          }
@@ -47937,6 +47937,7 @@ globalThis.LoadNewClient = () => {
       this.action = action;
       this.info = info;
       this.hited = 0;
+      this.time = Date.now()
       this.extra = extra;
       this.r = {
          x: x,
