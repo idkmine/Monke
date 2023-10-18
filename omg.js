@@ -43524,12 +43524,6 @@ globalThis.LoadNewClient = () => {
       var wheat = world.units[ITEMS.WHEAT_SEED];
       for (var i = 0; i < wheat.length; i++)
          draw_transition(wheat[i]);
-      var crate = world.units[ITEMS.CRATE];
-      for (var i = 0; i < crate.length; i++)
-         draw_transition(crate[i], SPRITE.CRATE, SPRITE.HURT_DEAD_BOX);
-      var dead_box = world.units[ITEMS.DEAD_BOX];
-      for (var i = 0; i < dead_box.length; i++)
-         draw_transition(dead_box[i], SPRITE.CRATE, SPRITE.HURT_DEAD_BOX);
       var gift = world.units[ITEMS.GIFT];
       for (var i = 0; i < gift.length; i++)
          draw_transition(gift[i], SPRITE.GIFT, SPRITE.HURT_GIFT);
@@ -43955,6 +43949,12 @@ globalThis.LoadNewClient = () => {
       draw_map_transition(draw_map_objects, is, ie, js, je, SPRITE.TREE, "t", 1, 0);
       draw_map_transition(draw_map_objects, is, ie, js, je, SPRITE.FIR, "f", 0, 0);
       draw_map_transition(draw_map_objects, is, ie, js, je, SPRITE.PALM, "plm", 2, 2);
+      var crate = world.units[ITEMS.CRATE];
+      for (var i = 0; i < crate.length; i++)
+         draw_transition(crate[i], SPRITE.CRATE, SPRITE.HURT_DEAD_BOX);
+      var dead_box = world.units[ITEMS.DEAD_BOX];
+      for (var i = 0; i < dead_box.length; i++)
+         draw_transition(dead_box[i], SPRITE.CRATE, SPRITE.HURT_DEAD_BOX);
       var windmill = world.units[ITEMS.WINDMILL];
       for (var i = 0; i < windmill.length; i++)
          draw_fg_transition(windmill[i]);
@@ -56760,7 +56760,7 @@ globalThis.LoadNewClient = () => {
       }
       if(evt.code == window.Cheat_Settings.AutoSteal.key){
        window.Cheat_Settings.AutoSteal.key && !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSteal.enabled = !1)
-      }
+    }
          if (user.chat.open && (evt.keyCode === 27))
             user.chat.quit();
          else if (user.terminal.open && (evt.keyCode === 27))
