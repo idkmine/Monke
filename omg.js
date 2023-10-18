@@ -48,7 +48,7 @@ globalThis.LoadNewClient = () => {
            enabled: true,
            draw: false
        },
-       Visuals: {
+       visuals: {
             Draw_Box_Info: true,
        }
    }
