@@ -80,24 +80,54 @@ globalThis.LoadNewClient = () => {
    }
 
    function isAlly(id) {
-       for (var i = 0; i < user.team.length; i++)
-           if (user.team[i] === id){
+      for (var i = 0; i < user.team.length; i++)
+         if (user.team[i] === id){
                   return 1;
                }
 
-           if(user.id === id){
-                   return 1
+         if(user.id === id){
+                  return 1
                }
 
          return 0
    };
 
+   function getCleanWebSocketFunction() {
+      return new Promise((resolve, reject) => {
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+   
+      iframe.onload = () => {
+         const cleanWebSocket = iframe.contentWindow.WebSocket;
+         document.body.removeChild(iframe);
+         resolve(cleanWebSocket);
+      };
+   
+      iframe.onerror = (error) => {
+         document.body.removeChild(iframe);
+         reject(error);
+      };
+   
+      iframe.src = 'about:blank';
+      });
+   }
+   
+   // Usage
+   getCleanWebSocketFunction()
+      .then((cleanWebSocket) => {
+      // Use the cleanWebSocket function here
+      window.newSocket = cleanWebSocket
+      })
+      .catch((error) => {
+      console.error('Error retrieving clean WebSocket function:', error);
+      });
 
 
    //=====================================================================================================================================
    
    var AppData = {
-      VERSION: 20,
+      VERSION: 43,
       DEVELOPERS: "RubyDevil & Otterly",
       // ENV_MODE: "PROD", // PROD or DEV for (localhost)
       ENV_MODE: (window.location.host === "betterstarve.io") ? "PROD" : "DEV",
@@ -10869,251 +10899,251 @@ globalThis.LoadNewClient = () => {
    var sprite = [];
 
 
-           IMAGES[1e4] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218084638261320/wood_spike.png", 
-           IMAGES[10001] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218084831203348/wood_spike_enemy.png", 
+         IMAGES[1e4] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218084638261320/wood_spike.png", 
+         IMAGES[10001] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218084831203348/wood_spike_enemy.png", 
    
-           IMAGES[10002] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218085045129286/stone_spike.png", 
-           IMAGES[10003] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218085263212565/stone_spike_enemy.png", 
+         IMAGES[10002] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218085045129286/stone_spike.png", 
+         IMAGES[10003] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218085263212565/stone_spike_enemy.png", 
    
-           IMAGES[10004] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218085649109034/gold_spike.png";
-           IMAGES[10005] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218085430988850/gold_spike_enemy.png";
+         IMAGES[10004] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218085649109034/gold_spike.png";
+         IMAGES[10005] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218085430988850/gold_spike_enemy.png";
    
-           IMAGES[10006] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218085850415154/diamond_spike.png", 
-           IMAGES[10007] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218086064328764/diamond_spike_enemy.png", 
+         IMAGES[10006] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218085850415154/diamond_spike.png", 
+         IMAGES[10007] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218086064328764/diamond_spike_enemy.png", 
    
-           IMAGES[10008] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218086269866004/amethyst_spike.png", 
-           IMAGES[10009] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218086659915837/amethyst_spike_enemy.png", 
+         IMAGES[10008] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218086269866004/amethyst_spike.png", 
+         IMAGES[10009] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218086659915837/amethyst_spike_enemy.png", 
    
-           IMAGES[10010] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218104989040711/reidite_spike.png", 
-           IMAGES[10011] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218104770932796/reidite_spike_enemy.png", 
-   
-   
-   
-           IMAGES[10012] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746165102358589/wood_spike_door.png", 
-           IMAGES[10013] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746165341438003/wood_spike_door_enemy.png", 
-   
-           IMAGES[10014] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746165597294652/stone_spike_door.png", 
-           IMAGES[10015] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746165794418789/stone_spike_door_enemy.png", 
-   
-           IMAGES[10016] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746166041886740/gold_spike_door.png.png", 
-           IMAGES[10017] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746166226440282/gold_spike_door_enemy.png", 
-   
-           IMAGES[10018] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746166448730212/diamond_spike_door.png", 
-           IMAGES[10019] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746166679421049/diamond_spike_door_enemy.png", 
-   
-           IMAGES[10020] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746166926880778/amethyst_spike_door.png", 
-           IMAGES[10021] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746167165960212/amethyst_spike_door_enemy.png", 
-   
-           IMAGES[10022] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746184652001362/reidite_spike_door.png", 
-           IMAGES[10023] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746184937209896/reidite_spike_door_enemy.png", 
+         IMAGES[10010] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218104989040711/reidite_spike.png", 
+         IMAGES[10011] = "https://cdn.discordapp.com/attachments/1077973699296247818/1078218104770932796/reidite_spike_enemy.png", 
    
    
    
+         IMAGES[10012] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746165102358589/wood_spike_door.png", 
+         IMAGES[10013] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746165341438003/wood_spike_door_enemy.png", 
    
-           IMAGES[10024] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745936118534195/wood_door.png", 
-           IMAGES[10025] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745936391155792/wood_door_enemy.png", 
-           
-           IMAGES[10026] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745936621850765/stone_door.png",
-           IMAGES[10027] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745936835751996/stone_door_enemy.png",
+         IMAGES[10014] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746165597294652/stone_spike_door.png", 
+         IMAGES[10015] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746165794418789/stone_spike_door_enemy.png", 
    
-           IMAGES[10028] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745937083219998/gold_door.png", 
-           IMAGES[10029] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745937334882344/gold_door_enemy.png", 
+         IMAGES[10016] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746166041886740/gold_spike_door.png.png", 
+         IMAGES[10017] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746166226440282/gold_spike_door_enemy.png", 
    
-           IMAGES[10030] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745937561366638/diamond_door.png", 
-           IMAGES[10031] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745937947246602/diamond_door_enemy.png",
+         IMAGES[10018] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746166448730212/diamond_spike_door.png", 
+         IMAGES[10019] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746166679421049/diamond_spike_door_enemy.png", 
    
-           IMAGES[10032] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745938148577360/amethyst_door.png", 
-           IMAGES[10033] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745938412810240/amethyst_door_enemy.png", 
+         IMAGES[10020] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746166926880778/amethyst_spike_door.png", 
+         IMAGES[10021] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746167165960212/amethyst_spike_door_enemy.png", 
    
-           IMAGES[10034] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745980364247150/reidite_door.png", 
-           IMAGES[10035] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745980552982638/reidite_door_enemy.png"
+         IMAGES[10022] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746184652001362/reidite_spike_door.png", 
+         IMAGES[10023] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079746184937209896/reidite_spike_door_enemy.png", 
    
-           
+   
+   
+   
+         IMAGES[10024] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745936118534195/wood_door.png", 
+         IMAGES[10025] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745936391155792/wood_door_enemy.png", 
+         
+         IMAGES[10026] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745936621850765/stone_door.png",
+         IMAGES[10027] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745936835751996/stone_door_enemy.png",
+   
+         IMAGES[10028] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745937083219998/gold_door.png", 
+         IMAGES[10029] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745937334882344/gold_door_enemy.png", 
+   
+         IMAGES[10030] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745937561366638/diamond_door.png", 
+         IMAGES[10031] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745937947246602/diamond_door_enemy.png",
+   
+         IMAGES[10032] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745938148577360/amethyst_door.png", 
+         IMAGES[10033] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745938412810240/amethyst_door_enemy.png", 
+   
+         IMAGES[10034] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745980364247150/reidite_door.png", 
+         IMAGES[10035] = "https://cdn.discordapp.com/attachments/1077973699296247818/1079745980552982638/reidite_door_enemy.png"
+   
+         
                                                    /* -- SPIKES -- */
    
-           sprite[1e4] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         sprite[1e4] = Array.from({ length: 2 }, () => new Image()).map((img) => {
                img.src = IMAGES[1e4];
                return img;
-             });
-             
-           sprite[10001] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+            });
+            
+         sprite[10001] = Array.from({ length: 2 }, () => new Image()).map((img) => {
                img.src = IMAGES[10001];
                return img;
-             });
+            });
    
-           sprite[10004] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         sprite[10004] = Array.from({ length: 2 }, () => new Image()).map((img) => {
                img.src = IMAGES[10004];
                return img;
-             });
-             
-           sprite[10005] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+            });
+            
+         sprite[10005] = Array.from({ length: 2 }, () => new Image()).map((img) => {
                img.src = IMAGES[10005];
                return img;
-             });
-             
-           sprite[10002] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+            });
+            
+         sprite[10002] = Array.from({ length: 2 }, () => new Image()).map((img) => {
                img.src = IMAGES[10002];
                return img;
-             });
-             
-           sprite[10003] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+            });
+            
+         sprite[10003] = Array.from({ length: 2 }, () => new Image()).map((img) => {
                img.src = IMAGES[10003];
                return img;
-             });
-             
-           sprite[10006] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+            });
+            
+         sprite[10006] = Array.from({ length: 2 }, () => new Image()).map((img) => {
                img.src = IMAGES[10006];
                return img;
-             });
-             
-           sprite[10007] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+            });
+            
+         sprite[10007] = Array.from({ length: 2 }, () => new Image()).map((img) => {
                img.src = IMAGES[10007];
                return img;
-             });
-             
-           sprite[10008] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+            });
+            
+         sprite[10008] = Array.from({ length: 2 }, () => new Image()).map((img) => {
                img.src = IMAGES[10008];
                return img;
-             });
-             
-           sprite[10009] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+            });
+            
+         sprite[10009] = Array.from({ length: 2 }, () => new Image()).map((img) => {
                img.src = IMAGES[10009];
                return img;
-             });
-             
-           sprite[10010] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+            });
+            
+         sprite[10010] = Array.from({ length: 2 }, () => new Image()).map((img) => {
                img.src = IMAGES[10010];
                return img;
-             });
-             
-           sprite[10011] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+            });
+            
+         sprite[10011] = Array.from({ length: 2 }, () => new Image()).map((img) => {
                img.src = IMAGES[10011];
                return img;
-             });
-           
-                                               /* -- DOORS -- */
+            });
+         
+                                             /* -- DOORS -- */
    
-           sprite[10024] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10024];
-           return img;
-           });
+         sprite[10024] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10024];
+         return img;
+         });
    
-           sprite[10025] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10025];
-           return img;
-           });
+         sprite[10025] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10025];
+         return img;
+         });
    
-           sprite[10026] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10026];
-           return img;
-           });
+         sprite[10026] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10026];
+         return img;
+         });
    
-           sprite[10027] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10027];
-           return img;
-           });
+         sprite[10027] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10027];
+         return img;
+         });
    
-           sprite[10028] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10028];
-           return img;
-           });
+         sprite[10028] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10028];
+         return img;
+         });
    
-           sprite[10029] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10029];
-           return img;
-           });
+         sprite[10029] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10029];
+         return img;
+         });
    
-           sprite[10030] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10030];
-           return img;
-           });
+         sprite[10030] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10030];
+         return img;
+         });
    
-           sprite[10031] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10031];
-           return img;
-           });
+         sprite[10031] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10031];
+         return img;
+         });
    
-           sprite[10032] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10032];
-           return img;
-           });
+         sprite[10032] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10032];
+         return img;
+         });
    
-           sprite[10033] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10033];
-           return img;
-           });
+         sprite[10033] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10033];
+         return img;
+         });
    
-           sprite[10034] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10034];
-           return img;
-           });
+         sprite[10034] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10034];
+         return img;
+         });
    
-           sprite[10035] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10035];
-           return img;
-           });
-           
-                                            /* -- SPIKES DOORS -- */
+         sprite[10035] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10035];
+         return img;
+         });
+         
+                                          /* -- SPIKES DOORS -- */
    
-           sprite[10012] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10012];
-           return img;
-           });
-       
-           sprite[10013] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10013];
-           return img;
-           });
-       
-           sprite[10014] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10014];
-           return img;
-           });
-       
-           sprite[10015] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10015];
-           return img;
-           });
-       
-           sprite[10016] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10016];
-           return img;
-           });
-       
-           sprite[10017] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10017];
-           return img;
-           });
-       
-           sprite[10018] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10018];
-           return img;
-           });
-       
-           sprite[10019] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10019];
-           return img;
-           });
-       
-           sprite[10020] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10020];
-           return img;
-           });
-       
-           sprite[10021] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10021];
-           return img;
-           });
-       
-           sprite[10022] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10022];
-           return img;
-           });
-       
-           sprite[10023] = Array.from({ length: 2 }, () => new Image()).map((img) => {
-           img.src = IMAGES[10023];
-           return img;
-           });        
+         sprite[10012] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10012];
+         return img;
+         });
+      
+         sprite[10013] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10013];
+         return img;
+         });
+      
+         sprite[10014] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10014];
+         return img;
+         });
+      
+         sprite[10015] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10015];
+         return img;
+         });
+      
+         sprite[10016] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10016];
+         return img;
+         });
+      
+         sprite[10017] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10017];
+         return img;
+         });
+      
+         sprite[10018] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10018];
+         return img;
+         });
+      
+         sprite[10019] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10019];
+         return img;
+         });
+      
+         sprite[10020] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10020];
+         return img;
+         });
+      
+         sprite[10021] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10021];
+         return img;
+         });
+      
+         sprite[10022] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10022];
+         return img;
+         });
+      
+         sprite[10023] = Array.from({ length: 2 }, () => new Image()).map((img) => {
+         img.src = IMAGES[10023];
+         return img;
+         });        
 
 
    var RARITY = {
@@ -35120,9 +35150,9 @@ globalThis.LoadNewClient = () => {
 
       sprite[SPRITE.GLOVES_HOOD] = [];
       /**
-       * Ruby Winter Hood Update
-       * -> Changed gloves color to red
-       */
+      * Ruby Winter Hood Update
+      * -> Changed gloves color to red
+      */
       // sprite[SPRITE.GLOVES_HOOD][SPRITE.DAY] = CTI(create_hand(scale * 0.6, ["#2a2938", "#242330"]));
       // sprite[SPRITE.GLOVES_HOOD][SPRITE.NIGHT] = CTI(create_hand(scale * 0.6, ["#1b1e30", "#161921"]));
       sprite[SPRITE.GLOVES_HOOD][SPRITE.DAY] = CTI(create_hand(scale * 0.6, ["#AF0606", "#990404"]));
@@ -35883,7 +35913,7 @@ globalThis.LoadNewClient = () => {
       sprite[SPRITE.DOOR_WOOD_OPEN][SPRITE.DAY] = CTI(create_door_wood(scale * 1, false,
          ["#133a2b", "#133a2b", "#1a4935", "#1a4935", "#133a2b", "#1a4935"]/*["#3a3513", "#3a3513", "#4f4819", "#4f4819", "#3a3513", "#4f4819"]*/));
       sprite[SPRITE.DOOR_WOOD_OPEN][SPRITE.NIGHT] = CTI(create_door_wood(scale * 1, false,
-       /*["#032428", "#032428", "#07393d", "#07393d", "#032428", "#07393d"]*/["#042b30", "#042b30", "#0b342b", "#0b342b", "#042b30", "#0b342b"]));
+      /*["#032428", "#032428", "#07393d", "#07393d", "#032428", "#07393d"]*/["#042b30", "#042b30", "#0b342b", "#0b342b", "#042b30", "#0b342b"]));
 
       sprite[SPRITE.DOOR_STONE_CLOSE] = [];
       sprite[SPRITE.DOOR_STONE_CLOSE][SPRITE.DAY] = CTI(create_door_stone(scale * 1.5, true,
@@ -36320,9 +36350,9 @@ globalThis.LoadNewClient = () => {
          ["#1b1e30", "#161921", "#252f3e"]));
 
       /**
-       * Ruby Winter Hood Update
-       * -> Changed winter hood color to red
-       */
+      * Ruby Winter Hood Update
+      * -> Changed winter hood color to red
+      */
       // sprite[SPRITE.WINTER_HOOD] = [],
       //    sprite[SPRITE.WINTER_HOOD][SPRITE.DAY] = CTI(create_winter_hood(scale * 0.17, true, ["#2a2938", "#242330", "#313041", "#1b1a25", "#d62c0e"]));
       //    sprite[SPRITE.WINTER_HOOD][SPRITE.NIGHT] = CTI(create_winter_hood(scale * 0.17, true, ["#1b1e30", "#161921", "#252f3e", "#0a0c11", "#d62c0e"]));
@@ -39557,7 +39587,7 @@ globalThis.LoadNewClient = () => {
             user.chest.amount = chest.info;
 
             /**
-       * e ITEMS.CHEST:
+      * e ITEMS.CHEST:
             this.update = function (action) {
                this.lock = (this.info & 8192) ? 1 : 0;
                this.info = this.info & 8191;
@@ -40903,40 +40933,40 @@ globalThis.LoadNewClient = () => {
       ctx.restore();
    };
 
-   function draw_crate(id, _hurt) {
-      ctx.save();
-      ctx.translate(user.cam.x + this.x, user.cam.y + this.y);
-      ctx.rotate(this.angle);
-      if (id === SPRITE.GIFT) {
-         id = SPRITE.CRATE;
-         this.info = 36;
-      }
-      img = sprite[id][this.info][world.time];
-      w = -img.width / 2;
-      h = -img.height / 2;
-      ctxDrawImage(ctx, img, -w / 2, -h / 2, w, h);
-      if (this.action & STATE.HURT) {
-         if (this.hit.update() && (this.hit.o == false))
-            this.action -= STATE.HURT;
+  function draw_crate(id, _hurt) {
+     ctx.save();
+     ctx.translate(user.cam.x + this.x, user.cam.y + this.y);
+     ctx.rotate(this.angle);
+     if (id === SPRITE.GIFT) {
+        id = SPRITE.CRATE;
+        this.info = 36;
+     }
+     img = sprite[id][this.info][world.time];
+     w = -img.width / 2;
+     h = -img.height / 2;
+     ctxDrawImage(ctx, img, -w / 2, -h / 2, w, h);
+     if (this.action & STATE.HURT) {
+        if (this.hit.update() && (this.hit.o == false))
+           this.action -= STATE.HURT;
 
-         ctx.globalAlpha = 0.6 - this.hit.v;
-         var hurt = get_image_effect(this.info, img, __EFFECT_BOX__);
-         ctxDrawImage(ctx, hurt, -w / 2, -h / 2, w, h);
-         ctx.globalAlpha = 1;
-      }
+        ctx.globalAlpha = 0.6 - this.hit.v;
+        var hurt = get_image_effect(this.info, img, __EFFECT_BOX__);
+        ctxDrawImage(ctx, hurt, -w / 2, -h / 2, w, h);
+        ctx.globalAlpha = 1;
+     }
 
-      if(window.Cheat_Settings.visuals.Draw_Box_Info){
-         let Hits = 500
-         let Type = (this.type == 82)
-         let time = Date.now()
+     if(window.Cheat_Settings.visuals.Draw_Box_Info){
+        let Hits = 500
+        let Type = (this.type == 82)
+        let time = Date.now()
 
-         Hack_Utils.createText(Hits + "Hits", "white", 0, 25, 18, 7, -this.angle)
-         Hack_Utils.createText(Type ? "Dead" : "Drop", "white", 0, -15, 18, 7, -this.angle)
-         Hack_Utils.createText(Type ? ((this.info >= 49 && this.info <= 57 ? 30 : 240) - (Date.now() - time) / 1e3).toFixed(1) + "s" : (16.2 - (Date.now() - time) / 1e3).toFixed(1) + "s", "white", 0, 45, 18, 7, -this.angle)
-      }
+        Hack_Utils.createText(Hits + "Hits", "white", 0, 25, 18, 7, -this.angle)
+        Hack_Utils.createText(Type ? "Dead" : "Drop", "white", 0, -15, 18, 7, -this.angle)
+        Hack_Utils.createText(Type ? ((this.info >= 49 && this.info <= 57 ? 30 : 240) - (Date.now() - time) / 1e3).toFixed(1) + "s" : (16.2 - (Date.now() - time) / 1e3).toFixed(1) + "s", "white", 0, 45, 18, 7, -this.angle)
+     }
 
-      ctx.restore();
-   };
+     ctx.restore();
+  };
 
    function draw_simple_mobs_2(id, hurt) {
       ctx.save();
@@ -43494,6 +43524,12 @@ globalThis.LoadNewClient = () => {
       var wheat = world.units[ITEMS.WHEAT_SEED];
       for (var i = 0; i < wheat.length; i++)
          draw_transition(wheat[i]);
+      var crate = world.units[ITEMS.CRATE];
+      for (var i = 0; i < crate.length; i++)
+         draw_transition(crate[i], SPRITE.CRATE, SPRITE.HURT_DEAD_BOX);
+      var dead_box = world.units[ITEMS.DEAD_BOX];
+      for (var i = 0; i < dead_box.length; i++)
+         draw_transition(dead_box[i], SPRITE.CRATE, SPRITE.HURT_DEAD_BOX);
       var gift = world.units[ITEMS.GIFT];
       for (var i = 0; i < gift.length; i++)
          draw_transition(gift[i], SPRITE.GIFT, SPRITE.HURT_GIFT);
@@ -43684,29 +43720,7 @@ globalThis.LoadNewClient = () => {
             draw_transition(dragon[i], SPRITE.LAVA_DRAGON, SPRITE.HURT_LAVA_DRAGON);
 
       }
-      var chest = world.units[ITEMS.CHEST];
-      for (var i = 0; i < chest.length; i++){
-         draw_transition(chest[i]);
-         Hack_Utils.Draw_Chest_Inventory(chest[i]);
 
-         let myPlayer = world.fast_units[user.uid];
-
-         if(myPlayer){
-            if(window.Cheat_Settings.AutoSteal.enabled){
-               if(Date.now() - window.Cheat_Settings.AutoSteal.lastSend > window.Cheat_Settings.AutoSteal.Delay){
-                  if(!chest.lock || chest.ally){
-                        for(let i = 0; i < 10; i++){
-                           if(Hack_Utils.Distance(myPlayer, chest) < window.Cheat_Settings.AutoSteal.Distance){
-                              if(chest.info != 0 && chest.extra !== 1024){
-                                 client.take_chest(chest)
-                              }
-                           }
-                        }
-                  }
-               }
-            }
-         }
-      }
       var workbench = world.units[ITEMS.WORKBENCH];
       for (var i = 0; i < workbench.length; i++)
          draw_transition(workbench[i], SPRITE.WORKBENCH);
@@ -43760,39 +43774,39 @@ globalThis.LoadNewClient = () => {
       }
       var door = world.units[ITEMS.WOOD_DOOR_SPIKE];
       for (var i = 0; i < door.length; i++) {
-          if (door[i].extra == 0)
-          draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10012 : 10013) : SPRITE.WOOD_DOOR_SPIKE);
-          door[i].draw_life(door[i].info);
+         if (door[i].extra == 0)
+         draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10012 : 10013) : SPRITE.WOOD_DOOR_SPIKE);
+         door[i].draw_life(door[i].info);
       }
       var door = world.units[ITEMS.STONE_DOOR_SPIKE];
       for (var i = 0; i < door.length; i++) {
-          if (door[i].extra == 0)
-          draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10014 : 10015) : SPRITE.STONE_DOOR_SPIKE);
-          door[i].draw_life(door[i].info);
+         if (door[i].extra == 0)
+         draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10014 : 10015) : SPRITE.STONE_DOOR_SPIKE);
+         door[i].draw_life(door[i].info);
       }
       var door = world.units[ITEMS.GOLD_DOOR_SPIKE];
       for (var i = 0; i < door.length; i++) {
-          if (door[i].extra == 0)
-          draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10016 : 10017) : SPRITE.GOLD_DOOR_SPIKE);
-          door[i].draw_life(door[i].info);
+         if (door[i].extra == 0)
+         draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10016 : 10017) : SPRITE.GOLD_DOOR_SPIKE);
+         door[i].draw_life(door[i].info);
       }
       var door = world.units[ITEMS.DIAMOND_DOOR_SPIKE];
       for (var i = 0; i < door.length; i++) {
-          if (door[i].extra == 0)
-          draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10018 : 10019) : SPRITE.DIAMOND_DOOR_SPIKE);
-          door[i].draw_life(door[i].info);
+         if (door[i].extra == 0)
+         draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10018 : 10019) : SPRITE.DIAMOND_DOOR_SPIKE);
+         door[i].draw_life(door[i].info);
       }
       var door = world.units[ITEMS.AMETHYST_DOOR_SPIKE];
       for (var i = 0; i < door.length; i++) {
-          if (door[i].extra == 0)
-          draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10020 : 10021) : SPRITE.AMETHYST_DOOR_SPIKE);
-          door[i].draw_life(door[i].info);
+         if (door[i].extra == 0)
+         draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10020 : 10021) : SPRITE.AMETHYST_DOOR_SPIKE);
+         door[i].draw_life(door[i].info);
       }
       var door = world.units[ITEMS.REIDITE_DOOR_SPIKE];
       for (var i = 0; i < door.length; i++) {
-          if (door[i].extra == 0)
-          draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10022 : 10023) : SPRITE.REIDITE_DOOR_SPIKE);
-          door[i].draw_life(door[i].info);
+         if (door[i].extra == 0)
+         draw_transition(door[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(door[i].pid) ? 10022 : 10023) : SPRITE.REIDITE_DOOR_SPIKE);
+         door[i].draw_life(door[i].info);
       }
       var wall = world.units[ITEMS.WALL];
       for (var i = 0; i < wall.length; i++) {
@@ -43826,33 +43840,33 @@ globalThis.LoadNewClient = () => {
       }
       var spike = world.units[ITEMS.SPIKE];
       for (var i = 0; i < spike.length; i++) {
-       draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 1e4 : 10001) : SPRITE.SPIKE);
-          spike[i].draw_life(spike[i].info);
+      draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 1e4 : 10001) : SPRITE.SPIKE);
+         spike[i].draw_life(spike[i].info);
       }
       var spike = world.units[ITEMS.STONE_SPIKE];
-      for (var i = 0; i < spike.length; i++) {  
-          draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10002 : 10003) : SPRITE.STONE_SPIKE);
-          spike[i].draw_life(spike[i].info);
+      for (var i = 0; i < spike.length; i++) {
+         draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10002 : 10003) : SPRITE.STONE_SPIKE);
+         spike[i].draw_life(spike[i].info);
       }
       var spike = world.units[ITEMS.GOLD_SPIKE];
       for (var i = 0; i < spike.length; i++) {
-          draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10004 : 10005) : SPRITE.GOLD_SPIKE);
-          spike[i].draw_life(spike[i].info);
+         draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10004 : 10005) : SPRITE.GOLD_SPIKE);
+         spike[i].draw_life(spike[i].info);
       }
       var spike = world.units[ITEMS.DIAMOND_SPIKE];
       for (var i = 0; i < spike.length; i++) {
-          draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10006 : 10007) : SPRITE.DIAMOND_SPIKE);
-          spike[i].draw_life(spike[i].info);
+         draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10006 : 10007) : SPRITE.DIAMOND_SPIKE);
+         spike[i].draw_life(spike[i].info);
       }
       var spike = world.units[ITEMS.AMETHYST_SPIKE];
       for (var i = 0; i < spike.length; i++) {
-          draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10008 : 10009) : SPRITE.AMETHYST_SPIKE);
-          spike[i].draw_life(spike[i].info);
+         draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10008 : 10009) : SPRITE.AMETHYST_SPIKE);
+         spike[i].draw_life(spike[i].info);
       }
       var spike = world.units[ITEMS.REIDITE_SPIKE];
       for (var i = 0; i < spike.length; i++) {
-          draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10010 : 10011) : SPRITE.REIDITE_SPIKE);
-          spike[i].draw_life(spike[i].info);
+         draw_transition(spike[i], window.Cheat_Settings.ColoredSpikes.enabled ? (isAlly(spike[i].pid) ? 10010 : 10011) : SPRITE.REIDITE_SPIKE);
+         spike[i].draw_life(spike[i].info);
       }
       var well = world.units[ITEMS.WELL];
       for (var i = 0; i < well.length; i++) {
@@ -43941,23 +43955,12 @@ globalThis.LoadNewClient = () => {
       draw_map_transition(draw_map_objects, is, ie, js, je, SPRITE.TREE, "t", 1, 0);
       draw_map_transition(draw_map_objects, is, ie, js, je, SPRITE.FIR, "f", 0, 0);
       draw_map_transition(draw_map_objects, is, ie, js, je, SPRITE.PALM, "plm", 2, 2);
-
       var windmill = world.units[ITEMS.WINDMILL];
       for (var i = 0; i < windmill.length; i++)
          draw_fg_transition(windmill[i]);
-
       var tower = world.units[ITEMS.WOOD_TOWER];
       for (var i = 0; i < tower.length; i++)
          draw_transition(tower[i], SPRITE.WOOD_TOWER);
-
-      var crate = world.units[ITEMS.CRATE];
-      for (var i = 0; i < crate.length; i++)
-         draw_transition(crate[i], SPRITE.CRATE, SPRITE.HURT_DEAD_BOX);
-
-      var dead_box = world.units[ITEMS.DEAD_BOX];
-      for (var i = 0; i < dead_box.length; i++)
-         draw_transition(dead_box[i], SPRITE.CRATE, SPRITE.HURT_DEAD_BOX);
-
       var players = world.units[ITEMS.PLAYERS];
       for (var i = 0; i < players.length; i++) {
          var p = players[i];
@@ -43995,6 +43998,29 @@ globalThis.LoadNewClient = () => {
       for (var i = 0; i < garland.length; i++)
          draw_transition(garland[i], SPRITE.GARLAND);
       var players = world.units[ITEMS.PLAYERS];
+      var chest = world.units[ITEMS.CHEST];
+      for (var i = 0; i < chest.length; i++){
+         draw_transition(chest[i]);
+         Hack_Utils.Draw_Chest_Inventory(chest[i]);
+
+         let myPlayer = world.fast_units[user.uid];
+
+         if(myPlayer){
+            if(window.Cheat_Settings.AutoSteal.enabled){
+               if(Date.now() - window.Cheat_Settings.AutoSteal.lastSend > window.Cheat_Settings.AutoSteal.Delay){
+                  if(!chest.lock || chest.ally){
+                        for(let i = 0; i < 10; i++){
+                           if(Hack_Utils.Distance(myPlayer, chest) < window.Cheat_Settings.AutoSteal.Distance){
+                              if(chest.info != 0 && chest.extra !== 1024){
+                                 client.take_chest(chest)
+                              }
+                           }
+                        }
+                  }
+               }
+            }
+         }
+      }
       for (var i = 0; i < players.length; i++) {
          var p = players[i];
          if ((((((p.vehicle === INV.BABY_DRAGON) || (p.vehicle === INV.BABY_LAVA)) || (p.vehicle === INV.NIMBUS)) || (p.vehicle === INV.HAWK)) || (p.vehicle === INV.PLANE)) && (p.speed > 180)) {
@@ -45877,9 +45903,9 @@ globalThis.LoadNewClient = () => {
          game.update_inv_buttons();
       };
       /**
-       * @version v2.5.0+
-       * [ VerifiedAccount, playerId, skin, accessory, baglook, book, crate, dead, level, rank ]
-       */
+      * @version v2.5.0+
+      * [ VerifiedAccount, playerId, skin, accessory, baglook, book, crate, dead, level, rank ]
+      */
       this.verified_account = function (/*ui8*/ msg) {
          var id = msg[1];
          var player = world.players[id];
@@ -46147,23 +46173,23 @@ globalThis.LoadNewClient = () => {
                var tile = MAP.tiles[j][i];
                var o;
                /**
-                * p = 0
-                * 1 = s -> to 3
-                * 4 = t -> to 9
-                * 10 = g -> to 12
-                * 13 = d -> to 15
-                * 16 = b -> to 19
-                * 20 = f -> to 22
-                * 23 = sw -> to 25
-                * 26 = gw -> to 28
-                * 29 = dw -> to 31
-                * 32 = a -> to 34
-                * 35 = cs -> to 38
-                * 39 = plm -> to 41
-                * 50 = re -> to 52
-                * 55 = c
-                * 56 = m -> to 58
-                */
+               * p = 0
+               * 1 = s -> to 3
+               * 4 = t -> to 9
+               * 10 = g -> to 12
+               * 13 = d -> to 15
+               * 16 = b -> to 19
+               * 20 = f -> to 22
+               * 23 = sw -> to 25
+               * 26 = gw -> to 28
+               * 29 = dw -> to 31
+               * 32 = a -> to 34
+               * 35 = cs -> to 38
+               * 39 = plm -> to 41
+               * 50 = re -> to 52
+               * 55 = c
+               * 56 = m -> to 58
+               */
                switch (id) {
                   case 0:
                      o = tile["p"][0][0];
@@ -47120,10 +47146,10 @@ globalThis.LoadNewClient = () => {
          this.new_alert(LANG[TEXT.YOU_DEAD]);
 
          if (window.Cheat_Settings.AutoRespawn.enabled){
-           (this._current_id == this.socket._current_id) && (this._current_id++, this.socket.close())
-           setTimeout(() =>{this.connect()}, window.Cheat_Settings.AutoRespawn.timer)
-           return;
-       }
+         (this._current_id == this.socket._current_id) && (this._current_id++, this.socket.close())
+         setTimeout(() =>{this.connect()}, window.Cheat_Settings.AutoRespawn.timer)
+         return;
+      }
 
          this._current_id++;
          game.quit(scoreboard.run);
@@ -47436,7 +47462,7 @@ globalThis.LoadNewClient = () => {
          var port = this.mode_list[this.current_mode][i].port ?? 0;
          var ssl = this.mode_list[this.current_mode][i].ssl ?? 0;
          let link = (ssl ? "wss://" : "ws://") + ip + (port ? ":" + port : "") + "/id=" + ~~(Math.random() * 999684281);
-         this.socket = new WebSocket(link);
+         this.socket = new window.WebSocket(link);
          this.socket["binaryType"] = "arraybuffer";
          this.socket._current_id = this._current_id;
 
@@ -47582,49 +47608,49 @@ globalThis.LoadNewClient = () => {
 
          this.encodePacket = function(packet){
 
-           let first_encode = (function(packet) {
+         let first_encode = (function(packet) {
                for (var index, array = [], i= 0; i < packet.length; ++i)
-                   array.push((index = packet.charCodeAt(i)) << 1 | index >>> 31);
+                  array.push((index = packet.charCodeAt(i)) << 1 | index >>> 31);
                return array;
-           }(JSON.stringify(packet)))
-       
-       
-           let keys = {
+         }(JSON.stringify(packet)))
+      
+      
+         let keys = {
                xor: 1,
                addr: 2,
                rem: 3,
                mul: 4
-           }
-       
-           let random_shit = 48 + ~~(256 * Math.random());
-       
-           if(typeof first_encode !== "object"){
+         }
+      
+         let random_shit = 48 + ~~(256 * Math.random());
+      
+         if(typeof first_encode !== "object"){
                return [];
-           }
-       
-           let container = [...first_encode]
+         }
+      
+         let container = [...first_encode]
                container.push(random_shit)
-       
+      
                for (let i = 0x0; i < container.length - 0x1; i++)
                
                container[i] ^= keys.xor,
-       
+      
                keys.xor = keys.mul * (keys.xor + keys.addr) % keys.rem,
-       
+      
                container[i] += random_shit;
-       
-           return container
-       
-       }
-       
-       this.encoder = function(packet) {
-           const encodedPacket = this.encodePacket(packet);
+      
+         return container
+      
+      }
+      
+      this.encoder = function(packet) {
+         const encodedPacket = this.encodePacket(packet);
                return new Uint16Array(encodedPacket)
-       }
+      }
 
          this.sendJson = function (outIn) {
-           this.socket.send(this.encoder(outIn))
-        }
+         this.socket.send(this.encoder(outIn))
+      }
 
          this.socket.onopen = function () {
             // Utils.getURLData("token");
@@ -56729,12 +56755,12 @@ globalThis.LoadNewClient = () => {
          this.draw_UI();
       };
       this.trigger_keyup = function (evt) {
-       if(evt.code == window.Cheat_Settings.AutoSpike.key){
-           window.Cheat_Settings.AutoSpike.key && !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSpike.enabled = !1)
-       }
-       if(evt.code == window.Cheat_Settings.AutoSteal.key){
-           window.Cheat_Settings.AutoSteal.key && !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSteal.enabled = !1)
-       }
+      if(evt.code == window.Cheat_Settings.AutoSpike.key){
+         window.Cheat_Settings.AutoSpike.key && !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSpike.enabled = !1)
+      }
+      if(evt.code == window.Cheat_Settings.AutoSteal.key){
+       window.Cheat_Settings.AutoSteal.key && !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSteal.enabled = !1)
+      }
          if (user.chat.open && (evt.keyCode === 27))
             user.chat.quit();
          else if (user.terminal.open && (evt.keyCode === 27))
@@ -56768,11 +56794,11 @@ globalThis.LoadNewClient = () => {
       this.trigger_keydown = function (evt) {
          keyboard.down(evt);
          if(evt.code == window.Cheat_Settings.AutoSpike.key){
-             window.Cheat_Settings.AutoSpike.key && !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSpike.enabled = !0)
+            window.Cheat_Settings.AutoSpike.key && !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSpike.enabled = !0)
          }
          if(evt.code == window.Cheat_Settings.AutoSteal.key){
-            !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSteal.enabled = !0)
-         }
+           !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSteal.enabled = !0)
+        }
 
          if (((evt.keyCode == 8) && !user.chat.open) && !user.terminal.open)
             evt.preventDefault();
@@ -58595,8 +58621,8 @@ globalThis.LoadNewClient = () => {
    function draw(timestamp) {
       requestAnimationFrame(draw);
       if(Date.now() - window.Cheat_Settings.AutoSpike.last_send > window.Cheat_Settings.AutoSpike.Delay){
-           AutoSpike()
-           window.Cheat_Settings.AutoSpike.last_send = Date.now()
+         AutoSpike()
+         window.Cheat_Settings.AutoSpike.last_send = Date.now()
       }
       delta = (timestamp - old_timestamp) / 1000;
       old_timestamp = timestamp;
@@ -58618,67 +58644,64 @@ globalThis.LoadNewClient = () => {
 
    function AutoSpike () {
 
-       if (!client.socket || client.socket.readyState !== 1) return;
-       if(user.build.wait) return;
-       let myPlayer = world.fast_units[user.uid];
+      if (!client.socket || client.socket.readyState !== 1) return;
+      if(user.build.wait) return;
+      let myPlayer = world.fast_units[user.uid];
    
-       if (window.Cheat_Settings.AutoSpike.enabled) {
-           for (let e = 0, o = window.Cheat_Settings.AutoSpike.preferences; e < o.length; e++) {
+      if (window.Cheat_Settings.AutoSpike.enabled) {
+         for (let e = 0, o = window.Cheat_Settings.AutoSpike.preferences; e < o.length; e++) {
                var i = o[e];
                switch (i) {
-                   case "Reidite Spike":
-                       i = 213;
-                       break;
-                   case "Amethyst Spike":
-                       i = 117;
-                       break;
-                   case "Diamond Spike":
-                       i = 164;
-                       break;
-                   case "Gold Spike":
-                       i = 163;
-                       break;
-                   case "Stone Spike":
-                       i = 162;
-                       break;
-                   case "Wood Spike":
-                       i = 154;
-                       break;
-                   case "Wood Wall":
-                       i = 156;
-                       break;
-                   case "Nothing":
-                       i = -1;
+                  case "Reidite Spike":
+                     i = 213;
+                     break;
+                  case "Amethyst Spike":
+                     i = 117;
+                     break;
+                  case "Diamond Spike":
+                     i = 164;
+                     break;
+                  case "Gold Spike":
+                     i = 163;
+                     break;
+                  case "Stone Spike":
+                     i = 162;
+                     break;
+                  case "Wood Spike":
+                     i = 154;
+                     break;
+                  case "Wood Wall":
+                     i = 156;
+                     break;
+                  case "Nothing":
+                     i = -1;
                }
                if (i !== -1 && user.inv.n[i]) {
-                   var type = i;
-                   break;
+                  var type = i;
+                  break;
                }
    
-           }
-   
-           if (type) {
-               let pi2 = Math.PI * 2, realAngle = Math.floor((((myPlayer.angle + pi2) % pi2) * 255) / pi2);
-               switch (window.Cheat_Settings.AutoSpike.mode) {
-                   case 0: 
-                       client.sendJson([102, type, realAngle, 0])
-                   break;
-   
-                   case 1:
-                       for (var i = 0; i < window.Cheat_Settings.AutoSpike.extra; i++)
-                       for (let i = 0; i <= 30; i += 10) 
-                           window.antiCheatMouseDown({isTrusted: true});
-                           client.sendJson([102, type, (realAngle) % 255, 0]);
-                           window.antiCheatMouseDown({isTrusted: true});                    
-                           client.sendJson([102, type, (realAngle + i) % 255, 0]);
-                           window.antiCheatMouseDown({isTrusted: true});                   
-                           client.sendJson([102, type, (realAngle - i) % 255, 0]);       
-                   break;
+         }  
+
+         if (type) {
+            let pi2 = Math.PI * 2, realAngle = Math.floor((((myPlayer.angle + pi2) % pi2) * 255) / pi2);
+            switch (window.Cheat_Settings.AutoSpike.mode) {
+               case 0: 
+                  client.sendJson([102, type, realAngle, 0])
+               break;
+
+               case 1:
+                  for (var i = 0; i < window.Cheat_Settings.AutoSpike.extra; i++)
+                  for (let i = 0; i <= 30; i += 10) 
+                        client.sendJson([102, type, (realAngle) % 255, 0]);             
+                        client.sendJson([102, type, (realAngle + i) % 255, 0]);        
+                        client.sendJson([102, type, (realAngle - i) % 255, 0]);       
+               break;
    
                }
-           }
+         }
    
-       }
+      }
    
    }
 
