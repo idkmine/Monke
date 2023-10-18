@@ -40956,7 +40956,7 @@ globalThis.LoadNewClient = () => {
      }
 
      if(window.Cheat_Settings.visuals.Draw_Box_Info){
-        let Hits = 500
+        let Hits = this.hited
         let Type = (this.type == 82)
         let time = Date.now()
 
@@ -46593,6 +46593,9 @@ globalThis.LoadNewClient = () => {
             if (u.update)
                u.update(action);
 
+           if(action.HURT){
+               u.hited++
+           }
          }
       };
       this.leaderboard = function (data) {
@@ -47933,6 +47936,7 @@ globalThis.LoadNewClient = () => {
       this.nangle = angle;
       this.action = action;
       this.info = info;
+      this.hited = 0;
       this.extra = extra;
       this.r = {
          x: x,
