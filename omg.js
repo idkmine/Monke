@@ -93,7 +93,7 @@ globalThis.LoadNewClient = () => {
                   return 1;
                }
 
-         if(user.id === id){
+         if (user.id === id){
                   return 1
                }
 
@@ -42046,8 +42046,8 @@ globalThis.LoadNewClient = () => {
         let owner = Hack_Utils.FindOwner(this.pid)
 
         if(owner){
-           Hack_Utils.createText(owner.nickname, "white", 0, 25, 18, 7, -this.angle)
-           Hack_Utils.createText((this.info * 2) + " ❤️", "red", 0, -15, 18, 7, -this.angle)
+           Hack_Utils.createText(owner.nickname, "white", 0, -10, 18, 7, 1)
+           Hack_Utils.createText((this.info * 2) + " ❤️", "red", 0, 25, 18, 7, 1)
         }
       }
 
