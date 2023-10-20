@@ -42012,48 +42012,47 @@ globalThis.LoadNewClient = () => {
    };
 
    function draw_emerald_machine() {
-      if (this.hit.update) {
-         if (this.hit.anim.update() && (this.hit.anim.o == false))
-            this.hit.update = false;
-
-         var v = (((1 - this.hit.anim.v) * delta) * 600) * scale;
-         var x = Math.cos(this.hit.angle - this.angle) * v;
-         var y = Math.sin(this.hit.angle - this.angle) * v;
-      } else {
-         var x = 0;
-         var y = 0;
-      };
-      this.rotate1 = (this.rotate1 + (delta * 3)) % (Math.PI * 2);
-      this.rotate2 = (this.rotate2 - (delta * 3)) % (Math.PI * 2);
-      ctx.save();
-      ctx.translate((user.cam.x + this.x) + x, (user.cam.y + this.y) + y);
-      ctx.save();
-      ctx.rotate(this.angle);
-      img = sprite[SPRITE.EMERALD_MACHINE][world.time];
-      ctxDrawImage(ctx, img, -img.width / 2, -img.height / 2);
-      ctx.restore();
-      ctx.save();
-      ctx.rotate(this.rotate1);
-      img = sprite[SPRITE.EMERALD_MACHINE_ROTATE][world.time];
-      ctxDrawImage(ctx, img, -img.width / 2, -img.height / 2);
-      ctx.restore();
-      ctx.save();
-      ctx.rotate(this.rotate2);
-      img = sprite[SPRITE.EMERALD_MACHINE_HOLE][world.time];
-      ctxDrawImage(ctx, img, -img.width / 2, -img.height / 2);
-
-      if(window.Cheat_Settings.visuals.Draw_Machine_Info){
-        let owner = Hack_Utils.FindOwner(this.pid)
-
-        if(owner){
-           Hack_Utils.createText(owner.nickname, "white", 0, -10, 18, 7, 1)
-           Hack_Utils.createText((this.info * 2) + " ❤️", "red", 0, 25, 18, 7, 1)
-        }
-      }
-
-      ctx.restore();
-      ctx.restore();
-   };
+     if (this.hit.update) {
+        if (this.hit.anim.update() && (this.hit.anim.o == false))
+           this.hit.update = false;
+  
+        var v = (((1 - this.hit.anim.v) * delta) * 600) * scale;
+        var x = Math.cos(this.hit.angle - this.angle) * v;
+        var y = Math.sin(this.hit.angle - this.angle) * v;
+     } else {
+        var x = 0;
+        var y = 0;
+     };
+     this.rotate1 = (this.rotate1 + (delta * 3)) % (Math.PI * 2);
+     this.rotate2 = (this.rotate2 - (delta * 3)) % (Math.PI * 2);
+     ctx.save();
+     ctx.translate((user.cam.x + this.x) + x, (user.cam.y + this.y) + y);
+     ctx.save();
+     ctx.rotate(this.angle);
+     img = sprite[SPRITE.EMERALD_MACHINE][world.time];
+     ctxDrawImage(ctx, img, -img.width / 2, -img.height / 2);
+     ctx.restore();
+     ctx.save();
+     ctx.rotate(this.rotate1);
+     img = sprite[SPRITE.EMERALD_MACHINE_ROTATE][world.time];
+     ctxDrawImage(ctx, img, -img.width / 2, -img.height / 2);
+     ctx.restore();
+     ctx.save();
+     ctx.rotate(this.rotate2);
+     img = sprite[SPRITE.EMERALD_MACHINE_HOLE][world.time];
+     ctxDrawImage(ctx, img, -img.width / 2, -img.height / 2);
+     if(window.Cheat_Settings.visuals.Draw_Machine_Info){
+       let owner = Hack_Utils.FindOwner(this.pid)
+  
+       if(owner){
+          Hack_Utils.createText(owner.nickname, "white", 0, -10, 18, 7, -this.angle)
+          Hack_Utils.createText((this.info * 2) + " ❤️", "red", 0, 25, 18, 7, -this.angle)
+       }
+     }
+     ctx.restore();
+     ctx.restore();
+  };
+  
 
    function draw_resurrection() {
       if (this.hit.update) {
