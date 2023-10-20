@@ -42028,6 +42028,14 @@ globalThis.LoadNewClient = () => {
      ctx.save();
      ctx.translate((user.cam.x + this.x) + x, (user.cam.y + this.y) + y);
      ctx.save();
+     if(window.Cheat_Settings.visuals.Draw_Machine_Info){
+        let owner = Hack_Utils.FindOwner(this.pid)
+   
+        if(owner){
+           Hack_Utils.createText(owner.nickname, "white", 0, -10, 18, 7, -this.angle)
+           Hack_Utils.createText((this.info * 2) + " ❤️", "red", 0, 25, 18, 7, -this.angle)
+        }
+      }
      ctx.rotate(this.angle);
      img = sprite[SPRITE.EMERALD_MACHINE][world.time];
      ctxDrawImage(ctx, img, -img.width / 2, -img.height / 2);
@@ -42041,14 +42049,7 @@ globalThis.LoadNewClient = () => {
      ctx.rotate(this.rotate2);
      img = sprite[SPRITE.EMERALD_MACHINE_HOLE][world.time];
      ctxDrawImage(ctx, img, -img.width / 2, -img.height / 2);
-     if(window.Cheat_Settings.visuals.Draw_Machine_Info){
-       let owner = Hack_Utils.FindOwner(this.pid)
-  
-       if(owner){
-          Hack_Utils.createText(owner.nickname, "white", 0, -10, 18, 7, -this.angle)
-          Hack_Utils.createText((this.info * 2) + " ❤️", "red", 0, 25, 18, 7, -this.angle)
-       }
-     }
+
      ctx.restore();
      ctx.restore();
   };
