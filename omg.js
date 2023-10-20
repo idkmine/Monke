@@ -78,7 +78,7 @@ globalThis.LoadNewClient = () => {
        FindOwner: function(id){
            var players = world.players
            for(let i = 0; i < players.length; i++){
-              if(player.alive && player.id == id){
+              if(players[i].alive && players[i].id == id){
                  return player
               }
            }
@@ -42044,8 +42044,8 @@ globalThis.LoadNewClient = () => {
         let owner = Hack_Utils.FindOwner(this.pid)
 
         if(owner){
-           Hack_Utils.createText(owner, "white", 0, 25, 18, 7, -this.angle)
-           Hack_Utils.createText(this.info + "%", "red", 0, -15, 18, 7, -this.angle)
+           Hack_Utils.createText(owner.nickname, "white", 0, 25, 18, 7, -this.angle)
+           Hack_Utils.createText((this.info * 2) + " ❤️", "red", 0, -15, 18, 7, -this.angle)
         }
       }
 
