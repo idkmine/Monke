@@ -78,8 +78,10 @@ globalThis.LoadNewClient = () => {
        FindOwner: function(id){
            var players = world.players
            for(let i = 0; i < players.length; i++){
-              if(players[i].alive && players[i].id == id){
-                 return player
+              if(players[i].alive){
+                 if(i == id){
+                    return players[i]
+                 }
               }
            }
        }
