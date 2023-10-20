@@ -42040,7 +42040,7 @@ globalThis.LoadNewClient = () => {
       img = sprite[SPRITE.EMERALD_MACHINE_HOLE][world.time];
       ctxDrawImage(ctx, img, -img.width / 2, -img.height / 2);
 
-      if(window.Cheat_Settings.visuals.draw_emerald_machine){
+      if(window.Cheat_Settings.visuals.Draw_Machine_Info){
         let owner = Hack_Utils.FindOwner(this.pid)
 
         if(owner){
@@ -43948,11 +43948,7 @@ globalThis.LoadNewClient = () => {
       var resurrection = world.units[ITEMS.RESURRECTION];
       for (var i = 0; i < resurrection.length; i++)
          draw_fg_transition(resurrection[i]);
-      var emerald_machine = world.units[ITEMS.EMERALD_MACHINE];
-      for (var i = 0; i < emerald_machine.length; i++) {
-         draw_fg_transition(emerald_machine[i]);
-         emerald_machine[i].draw_life(emerald_machine[i].info);
-      }
+
       draw_map_transition(draw_map_objects, is, ie, js, je, SPRITE.CACTUS, "c", 0);
       draw_map_transition(draw_map_objects, is, ie, js, je, SPRITE.TREE, "t", 5, 4);
       draw_map_transition(draw_map_objects, is, ie, js, je, SPRITE.FIR, "f", 2, 2);
@@ -43977,6 +43973,11 @@ globalThis.LoadNewClient = () => {
       var tower = world.units[ITEMS.WOOD_TOWER];
       for (var i = 0; i < tower.length; i++)
          draw_transition(tower[i], SPRITE.WOOD_TOWER);
+     var emerald_machine = world.units[ITEMS.EMERALD_MACHINE];
+        for (var i = 0; i < emerald_machine.length; i++) {
+           draw_fg_transition(emerald_machine[i]);
+           emerald_machine[i].draw_life(emerald_machine[i].info);
+     }
       var players = world.units[ITEMS.PLAYERS];
       for (var i = 0; i < players.length; i++) {
          var p = players[i];
