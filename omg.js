@@ -50,16 +50,13 @@ globalThis.LoadNewClient = () => {
        },
        visuals: {
             Draw_Box_Info: true,
+            Draw_Machine_Info: true,
        }
    }
 
    let Hack_Utils = {
       Distance: function(obj1, obj2){
          return Math.sqrt((obj2.x - obj1.x) ** 2 + (obj2.y - obj1.y) ** 2);
-      },
-
-      Draw_Chest_Inventory: function(chest){
-
       },
 
       createText: function(text, fillColor, x, y, fontSize, strokeWidth, rotation = 0) {
@@ -76,7 +73,16 @@ globalThis.LoadNewClient = () => {
          ctx.strokeText(text, x - textMetrics.width, y);
          ctx.fillText(text, x - textMetrics.width, y);
          ctx.restore();
-       }       
+       },
+       
+       FindOwner: function(id){
+           var players = world.players
+           for(let i = 0; i < players.length; i++){
+              if(player.alive && player.id == id){
+                 return player
+              }
+           }
+       }
    }
 
    function isAlly(id) {
@@ -42033,6 +42039,16 @@ globalThis.LoadNewClient = () => {
       ctx.rotate(this.rotate2);
       img = sprite[SPRITE.EMERALD_MACHINE_HOLE][world.time];
       ctxDrawImage(ctx, img, -img.width / 2, -img.height / 2);
+
+      if(window.Cheat_Settings.visuals.draw_emerald_machine){
+        let owner = Hack_Utils.FindOwner(this.pid)
+
+        if(owner){
+           Hack_Utils.createText(owner, "white", 0, 25, 18, 7, -this.angle)
+           Hack_Utils.createText(this.info + "%", "red", 0, -15, 18, 7, -this.angle)
+        }
+      }
+
       ctx.restore();
       ctx.restore();
    };
@@ -44001,7 +44017,6 @@ globalThis.LoadNewClient = () => {
       var chest = world.units[ITEMS.CHEST];
       for (var i = 0; i < chest.length; i++){
          draw_transition(chest[i]);
-         Hack_Utils.Draw_Chest_Inventory(chest[i]);
 
          let myPlayer = world.fast_units[user.uid];
 
