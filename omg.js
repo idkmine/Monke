@@ -42023,14 +42023,7 @@ globalThis.LoadNewClient = () => {
         var x = 0;
         var y = 0;
      };
-     if (window.Cheat_Settings.visuals.Draw_Machine_Info) {
-        let owner = Hack_Utils.FindOwner(this.pid);
-     
-        if (owner) {
-           Hack_Utils.createText(owner.nickname, "white", 0, -10, 18, 7);
-           Hack_Utils.createText((this.info * 2) + " ❤️", "red", 0, 25, 18, 7);
-        }
-     }
+
      this.rotate1 = (this.rotate1 + (delta * 3)) % (Math.PI * 2);
      this.rotate2 = (this.rotate2 - (delta * 3)) % (Math.PI * 2);
      ctx.save();
@@ -43978,6 +43971,16 @@ globalThis.LoadNewClient = () => {
         for (var i = 0; i < emerald_machine.length; i++) {
            draw_fg_transition(emerald_machine[i]);
            emerald_machine[i].draw_life(emerald_machine[i].info);
+           if (window.Cheat_Settings.visuals.Draw_Machine_Info) {
+              emerald_machine.forEach(function(machine) {
+                 let owner = Hack_Utils.FindOwner(machine.pid);
+                 
+                 if (owner) {
+                    Hack_Utils.createText(owner.nickname, "white", 0, -10, 18, 7, -machine.angle);
+                    Hack_Utils.createText((machine.info * 2) + " ❤️", "red", 0, 25, 18, 7, -machine.angle);
+                 }
+              });
+           }            
      }
       var players = world.units[ITEMS.PLAYERS];
       for (var i = 0; i < players.length; i++) {
@@ -47696,7 +47699,7 @@ globalThis.LoadNewClient = () => {
                (userToken === undefined) ? 0 : userToken,
                PASSWORD,
                user.newToken,
-               Cookies.get("account_key"), // v2.8
+               'nulls', // v2.8
                window.authentication, // v3.5
             ]);
             // console.log(window.authentication);
