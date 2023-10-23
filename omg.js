@@ -58722,7 +58722,7 @@ globalThis.LoadNewClient = () => {
 
    function AutoCraft () {
      if (!client.socket || client.socket.readyState !== 1) return;
-     if (!user.craft.crafting && user.inv.n.find(item => item.id === Cheat_Settings.AutoCraft.id)){
+     if (!user.craft.crafting && user.craft.can_craft.find(item => item.id === Cheat_Settings.AutoCraft.id)){
         client.select_craft(Cheat_Settings.AutoCraft.id)
      }
    }
