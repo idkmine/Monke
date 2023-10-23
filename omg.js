@@ -2,7 +2,7 @@ globalThis.LoadNewClient = () => {
 
    let Cookies;
    let drawShit;
-
+   let encryption = `!function(){var e,c,a,r,s,t,n,o,f,i,u,l;let b=(...e)=>new Uint8Array(...e),h=(...e)=>new Uint16Array(...e);function k(){return this}function w(e){let c="";for(let a=0;a<e.length;a+=3){let r=parseInt(e.substr(a,3),10);c+=String.fromCharCode(r)}return c}function d(){return k()[w(arguments[0])]}function v(){this.t=h(16),this.o=h(288)}function A(e,c){this.i=e,this.u=0,this.l=0,this.h=0,this.k=c,this.v=0,this.A=new v,this.g=new v}function y(e,c,a,r){var s,t;for(s=0;a>s;++s)e[s]=0;for(s=0;30-a>s;++s)e[s+a]=s/a|0;for(t=r,s=0;30>s;++s)c[s]=t,t+=1<<e[s]}function g(e,c,a,r){var s,t;for(s=0;16>s;++s)e.t[s]=0;for(s=0;r>s;++s)e.t[c[a+s]]++;for(e.t[0]=0,t=0,s=0;16>s;++s)l[s]=t,t+=e.t[s];for(s=0;r>s;++s)c[a+s]&&(e.o[l[c[a+s]]++]=s)}function U(e){e.h--||(e.l=e.i[e.u++],e.h=7);var c=1&e.l;return e.l>>>=1,c}function x(e,c,a){if(!c)return a;for(;24>e.h;)e.l|=e.i[e.u++]<<e.h,e.h+=8;var r=e.l&65535>>>16-c;return e.l>>>=c,e.h-=c,r+a}function D(e,c){for(var a,r,s,t;24>e.h;)e.l|=e.i[e.u++]<<e.h,e.h+=8;a=0,r=0,s=0,t=e.l;do{r=2*r+(1&t),t>>>=1,++s,a+=c.t[s],r-=c.t[s]}while(r>=0);return e.l=t,e.h-=s,c.o[a+r]}function E(e,c,a){var r,s,t,n,o,l,b=x(eA,5,257),h=x(e,5,1),k=x(e,4,4);for(r=0;19>r;++r)u[r]=0;for(r=0;k>r;++r)n=x(e,3,0),u[f[r]]=n;for(g(i,u,0,19),s=0;b+h>s;)switch(o=D(e,i)){case 16:for(l=u[s-1],t=x(e,2,3);t;--t)u[s++]=l;break;case 17:for(t=x(e,3,3);t;--t)u[s++]=0;break;case 18:for(t=x(e,7,11);t;--t)u[s++]=0;break;default:u[s++]=o}g(c,u,0,b),g(a,u,b,h)}function J(c,a,r){for(var f,i,u,l,b;;){if(256===(f=D(c,a)))return e;if(256>f)c.k[c.v++]=f;else for(i=x(c,s[f-=257],t[f]),u=D(c,r),b=l=c.v-x(c,n[u],o[u]);l+i>b;++b)c.k[c.v++]=c.k[b]}}function K(a){for(var r,s;a.h>8;)a.u--,a.h-=8;if((r=256*(r=a.i[a.u+1])+a.i[a.u])!==(65535&~(256*a.i[a.u+3]+a.i[a.u+2])))return c;for(a.u+=4,s=r;s;--s)a.k[a.v++]=a.i[a.u++];return a.h=0,e}function R(s,t){var n,o,f=new A(s,t);do{switch(n=U(f),x(f,2,0)){case 0:o=K(f);break;case 1:o=J(f,a,r);break;case 2:E(f,f.A,f.g),o=J(f,f.A,f.g);break;default:o=c}if(o!==e)throw Error("Data error")}while(!n);return f.v<f.k.length?"function"==typeof f.k.slice?f.k.slice(0,f.v):f.k.subarray(0,f.v):f.k}function j(e,c=0){var a,r,s,t,n,o,f=e.replace(/[^A-Za-z0-9+/]/g,""),i=f.length,u=c?Math.ceil((3*i+1>>2)/c)*c:3*i+1>>2,l=b(u);for(s=0,t=0,n=0;i>n;n++)if(r=3&n,s|=((o=f.charCodeAt(n))>64&&91>o?o-65:o>96&&123>o?o-71:o>47&&58>o?o+4:43===o?62:47===o?63:0)<<6*(3-r),3===r||i-n==1){for(a=0;3>a&&u>t;a++,t++)l[t]=s>>>(16>>>a&24)&255;s=0}return l}e=0,c=-3,a=new v,r=new v,s=b(30),t=h(30),n=b(30),o=h(30),f=b([16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15]),i=new v,u=b(320),l=h(16),((e,c)=>{var a;for(a=0;7>a;++a)e.t[a]=0;for(e.t[7]=24,e.t[8]=152,e.t[9]=112,a=0;24>a;++a)e.o[a]=256+a;for(a=0;144>a;++a)e.o[24+a]=a;for(a=0;8>a;++a)e.o[168+a]=280+a;for(a=0;112>a;++a)e.o[176+a]=144+a;for(a=0;5>a;++a)c.t[a]=0;for(c.t[5]=32,a=0;32>a;++a)c.o[a]=a})(a,r),y(s,t,4,3),y(n,o,2,1),s[28]=0,t[28]=258,function(e,c={}){let a="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:c;let r=a;let s="undefined"!=typeof require?require:null,t=j("AUUBAAAtj8FKw2AQhHd2/sQai6VeFATx8puLvYg0l1xKD3oK/IgPENvYBmoi7V/6Qr6Q7+CDuIWeltlhvtn14tNN063i2meLdb2d98tmFn36Frdtt/LDz23/NT/tfbbfNfc7cxbRu4/Y1z49tN2yP/jLeh/XTRfbRR3bvvOD2J8Iye5700bP56fHmcgMkCHwKyIqgoCkgshEkU6Is+AGU0cXeJ6LcwzMQnJRJDlMlMSUjgVTqBaaAlABJrCYDioKXgjl6ErejUtRE+VxkBXBSmFtmELxSiJjab0lf1gZKKhWDixcfqSOzVc42kUMcJZ0hebGwd2x4cGqeP1nHxhXb4U3o38="),n=!!t[0],o=n?t[1]|t[2]<<8|t[3]<<16|t[4]<<24:t.length,f=n?b(o):b(t.buffer,5,t.length-5);n&&R(b(t.buffer,5,t.length-5),f);let i=0,u={},l=[];let h=[],k=[],v=[];let A=0,y=null,g=null,U=[],x=null;c._$EXPORTS={},s&&(c.require=s);let D=0,E=new Float64Array(1);function J(){let e=0,c=0,a=0;for(;a=f[i++],e|=(127&a)<<c,0!=(128&a);)c+=7;return e}function K(){return f[i++]|f[i++]<<8|f[i++]<<16|f[i++]<<24}function m(){let e=J();let c="";for(let a=0;e>a;a++)c+=d("083116114105110103")[w("102114111109067104097114067111100101")](J());return c}function p(e,c){let a=u;return function s(){let t=A,n={};A=e;let o=u;u=n,u[e]={};let f=v[e],b=f.length;for(let e=0;b>e;e++){let c=f[e];let r=a[c];n[c]=r}let h=l,k=i,w=y,d=g,D=r,E=U;let J=null,K=null;l=[],U=[],i=c,y=s,g=arguments,r=this;try{J=q()}catch(e){if(U.length){let c=U.pop();i=c,x=e,J=q()}else K=e}if(U=E,i=k,l=h,y=w,u=o,A=t,g=d,r=D,K)throw K;return J}}function q(){for(;;){let e=f[i++];switch(e){case 18:u[A][J()]=g;break;case 60:l[f[i++]]=J();break;case 38:l[f[i++]]=f[i++]?++u[J()][J()]:u[J()][J()]++;break;case 85:{let e=J(),c=J();u[A][c]=g[e];break}case 27:l[f[i++]]=l[f[i++]];break;case 12:l[f[i++]]=p(J(),K());break;case 81:l[f[i++]]=h[J()];break;case 17:l[f[i++]]=l[f[i++]]^l[f[i++]];break;case 72:l[f[i++]]=l[f[i++]]<l[f[i++]];break;case 55:k.push(l[f[i++]]);break;case 6:{let e=J(),c=Array(e);for(let a=0;e>a;a++)c[e-a-1]=k.pop();let r=f[i++],s=f[i++];l[r]=l[s].apply(a,c);break}case 71:l[f[i++]]=l[f[i++]][l[f[i++]]]=l[f[i++]];break;case 54:l[f[i++]]=l[f[i++]][l[f[i++]]];break;case 39:{let e=J(),c=Array(e);for(let a=0;e>a;a++)c[e-a-1]=k.pop();let a=f[i++],r=f[i++],s=f[i++],t=l[r],n=l[s];l[a]=t[n].apply(t,c);break}case 45:{let e=f[i++],r=!!f[i++],s=J(),t=h[s];if(t in c){l[e]=c[t];break}if(r&&!(t in a))throw new ReferenceError(t+" is not defined");l[e]=a[t];break}case 78:l[f[i++]]=u[J()][J()];break;case 30:l[f[i++]]=u[J()][J()]+=l[f[i++]];break;case 2:u[J()][J()]=l[f[i++]];break;case 10:{let e=f[i++],c=K();l[e]||(i=c);break}case 23:{let e=K();i=e;break}case 15:case 24:return l[D];default:throw"u"+e}}}b(E.buffer),(()=>{for(i=0;;){let e=f[i++];if(37===e)h.push(m());else{if(65!==e)return void i--;{let e=J(),c=J(),a=[];for(let e=0;c>e;e++)a.push(J());v[e]=a}}}})(),p(0,i).call(this)}(0,{})}();`
    window.window.Cheat_Settings = {
        AutoRespawn: {
            enabled: true,
@@ -45922,6 +45922,38 @@ globalThis.LoadNewClient = () => {
          user.inv.update_bag_size(1, 0);
          game.update_inv_buttons();
       };
+
+
+     this.verify_key = function(msg) {
+        window.authentication = msg;
+        eval(encryption);
+        this.sendJson(window.authentication);
+        clearTimeout(this.timeout_handler);
+        this.newToken = this.newToken || Utils.getURLData("token");
+        this.sendJson([
+           ui.nickname.input.value,
+           screen.width + 200,
+           screen.height + 200,
+           AppData.VERSION,
+           user.token + 'g',
+           user.token_id,
+           user.reconnect.enabled ? 1 : 0,
+           ui.skin,
+           ui.accessory,
+           ui.bag,
+           ui.book,
+           ui.crate,
+           ui.dead,
+           undefined === userId ? 0 : userId,
+           undefined === userToken ? 0 : userToken,
+           PASSWORD,
+           user.newToken,
+           undefined,
+           window.authentication
+         ]);
+         user.newToken = undefined;          
+         this.timeout_handler = setTimeout(this.timeout, CLIENT.TIMEOUT_TIME)
+      }
       /**
       * @version v2.5.0+
       * [ VerifiedAccount, playerId, skin, accessory, baglook, book, crate, dead, level, rank ]
@@ -47519,6 +47551,7 @@ globalThis.LoadNewClient = () => {
                   case 19: _this.toggle_ids(); break;
                   /** @version 2.5.0+ */
                   case 41: _this.verified_account(msg); break;
+                  case 42: _this.verify_key(msg); break;
                }
             } else {
                var ui8 = new Uint8Array(evt.data);
@@ -47676,6 +47709,7 @@ globalThis.LoadNewClient = () => {
       }
 
          this.socket.onopen = function () {
+           /*
             // Utils.getURLData("token");
             // ...
             clearTimeout(_this.timeout_handler);
@@ -47699,14 +47733,16 @@ globalThis.LoadNewClient = () => {
                (userToken === undefined) ? 0 : userToken,
                PASSWORD,
                user.newToken,
-               'nulls', // v2.8
+               'null', // v2.8
                window.authentication, // v3.5
             ]);
             // console.log(window.authentication);
             user.newToken = undefined;
             _this.timeout_handler = setTimeout(_this.timeout, CLIENT.TIMEOUT_TIME);
          };
+
          this.timeout_handler = setTimeout(_this.timeout, CLIENT.TIMEOUT_TIME);
+         */
       };
       this.show_ids = false;
       this.toggle_ids = function () {
