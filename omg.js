@@ -17,6 +17,11 @@ globalThis.LoadNewClient = () => {
            Distance: 200,
            draw: true
        },
+       AutoCraft: {
+           id: 0,
+           enabled: false,
+           key: 'KeyM'
+       },
        AutoSpike: {
            enabled: false,
            key: "Space",
@@ -46705,6 +46710,7 @@ globalThis.LoadNewClient = () => {
             this.inv_full();
             return 0;
          }
+         window.Cheat_Settings.AutoCraft.id = id;
          this.sendJson([7, id]);
          return 1;
       };
@@ -56821,7 +56827,8 @@ globalThis.LoadNewClient = () => {
       }
       if(evt.code == window.Cheat_Settings.AutoSteal.key){
        window.Cheat_Settings.AutoSteal.key && !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSteal.enabled = !1)
-    }
+     }
+  
          if (user.chat.open && (evt.keyCode === 27))
             user.chat.quit();
          else if (user.terminal.open && (evt.keyCode === 27))
@@ -56859,6 +56866,10 @@ globalThis.LoadNewClient = () => {
          }
          if(evt.code == window.Cheat_Settings.AutoSteal.key){
            !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoSteal.enabled = !0)
+        }
+        if(evt.code == window.Cheat_Settings.AutoCraft.key){
+           !user.chat.open && !user.terminal.open && (window.Cheat_Settings.AutoCraft.enabled = !window.Cheat_Settings.AutoCraft.enabled)
+           client.new_alert(`AutoCraft Has been ${Cheat_Settings.AutoCraft.enabled ? 'enabled' : 'disabled'}`)
         }
 
          if (((evt.keyCode == 8) && !user.chat.open) && !user.terminal.open)
@@ -58685,6 +58696,12 @@ globalThis.LoadNewClient = () => {
          AutoSpike()
          window.Cheat_Settings.AutoSpike.last_send = Date.now()
       }
+      if(isNaN(Date.now() - window.Cheats) || Date.now() - window.Cheats > 150){
+        if(Cheat_Settings.AutoCraft.enabled){
+           AutoCraft()
+        }
+        window.Cheats = Date.now()
+     }
       delta = (timestamp - old_timestamp) / 1000;
       old_timestamp = timestamp;
       delta = (delta > 1) ? 1 : delta;
@@ -58702,6 +58719,13 @@ globalThis.LoadNewClient = () => {
       }
    };
 
+
+   function AutoCraft () {
+     if (!client.socket || client.socket.readyState !== 1) return;
+     if (!user.craft.crafting && user.inv.n.find(item => item.id === Cheat_Settings.AutoCraft.id)){
+        client.select_craft(Cheat_Settings.AutoCraft.id)
+     }
+   }
 
    function AutoSpike () {
 
@@ -58765,7 +58789,6 @@ globalThis.LoadNewClient = () => {
       }
    
    }
-
 
 
    window.onload = () => {
